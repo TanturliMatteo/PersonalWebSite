@@ -1,5 +1,10 @@
-// Single source of truth for color families. Everything else (accent tokens,
-// [data-tone] themes, particles, gradient borders) is generated from this map.
+// =============================================================================
+// ABSTRACTS · Palette
+// Single source of truth for color families. Accent tokens, [data-tone]
+// themes, hero particles and gradient borders are all generated from this map.
+// Keys are quoted: unquoted `indigo` / `violet` would be CSS color values.
+// =============================================================================
+
 $tones: (
   'indigo': #4f46e5,
   'violet': #9333ea,

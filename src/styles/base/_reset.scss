@@ -1,3 +1,17 @@
+// =============================================================================
+// BASE · Reset
+// Modern, mobile-aware reset:
+// - no text inflation in landscape (text-size-adjust)
+// - anchor jumps land below the fixed header (scroll-padding-top)
+// - no horizontal scroll: `overflow-x: clip` (unlike hidden, keeps sticky working)
+// - long words / URLs wrap instead of widening the page
+// - no grey tap flash and no double-tap-zoom delay on controls
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Document
+// -----------------------------------------------------------------------------
+
 *,
 *::before,
 *::after {
@@ -9,24 +23,24 @@
 }
 
 html {
-  // Stop iOS / Android from inflating text in landscape.
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + var(--safe-top) + 16px);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  // Anchor jumps land below the fixed header (notch included).
-  scroll-padding-top: calc(var(--header-height) + var(--safe-top) + 16px);
-  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  // Long words, URLs and emails never push the layout sideways.
-  overflow-wrap: break-word;
-  // No accidental horizontal scroll; `clip` (unlike `hidden`) keeps position: sticky working.
   overflow-x: clip;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
 }
+
+// -----------------------------------------------------------------------------
+// Elements
+// -----------------------------------------------------------------------------
 
 img,
 svg,
@@ -48,10 +62,10 @@ select {
 }
 
 button {
-  background: none;
-  border: 0;
   padding: 0;
   cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 a {
@@ -61,17 +75,19 @@ a {
 
 a,
 button {
-  // No grey flash on tap in mobile WebKit; :focus-visible keeps keyboard accessibility.
-  -webkit-tap-highlight-color: transparent;
-  // Disables double-tap zoom on controls, removing the tap delay.
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ul,
 ol {
-  list-style: none;
   padding: 0;
+  list-style: none;
 }
+
+// -----------------------------------------------------------------------------
+// Reduced motion
+// -----------------------------------------------------------------------------
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -81,8 +97,8 @@ ol {
   *,
   *::before,
   *::after {
+    transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }

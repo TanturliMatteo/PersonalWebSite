@@ -1,4 +1,15 @@
+// =============================================================================
+// SECTION · Contact
+// Intro + CTA next to a list of contact rows. Long values (email, URLs) wrap
+// instead of being cut off on narrow phones.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
+
+// -----------------------------------------------------------------------------
+// Layout
+// The CTA button is full width on phones, natural width from `sm`.
+// -----------------------------------------------------------------------------
 
 .panel {
   display: grid;
@@ -12,8 +23,8 @@
 
 .intro {
   display: grid;
-  justify-items: stretch; // full-width button on phones
   gap: 20px;
+  justify-items: stretch;
   font-size: fluid(1.02rem, 1.15rem);
   color: var(--color-text-muted);
 
@@ -21,6 +32,10 @@
     justify-items: start;
   }
 }
+
+// -----------------------------------------------------------------------------
+// Contact rows
+// -----------------------------------------------------------------------------
 
 .list {
   display: grid;
@@ -30,13 +45,13 @@
 .item {
   @include focus-ring;
   display: flex;
-  align-items: center;
   gap: 14px;
+  align-items: center;
   min-height: 64px;
   padding: 10px 14px;
-  border-radius: var(--radius-md);
   background: var(--color-surface-muted);
   border: 1px solid transparent;
+  border-radius: var(--radius-md);
   transition:
     background-color var(--transition),
     border-color var(--transition);
@@ -58,9 +73,9 @@ a.item {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  border-radius: 12px;
-  background: var(--color-surface);
   color: var(--color-accent);
+  background: var(--color-surface);
+  border-radius: 12px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -72,12 +87,11 @@ a.item {
 .label {
   font-size: 0.78rem;
   font-weight: 600;
+  color: var(--color-text-subtle);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--color-text-subtle);
 }
 
-// Wrap long values (email, URLs) instead of cutting them off on narrow phones.
 .value {
   font-weight: 600;
   color: var(--color-text);

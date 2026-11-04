@@ -1,4 +1,13 @@
+// =============================================================================
+// SECTION · Stack ("Behind the site")
+// Intro card, build stats tiles and modern CSS technique cards.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
+
+// -----------------------------------------------------------------------------
+// Intro
+// -----------------------------------------------------------------------------
 
 .intro {
   display: grid;
@@ -8,8 +17,8 @@
 
   @include up(lg) {
     grid-template-columns: 1fr auto;
-    align-items: center;
     gap: 40px;
+    align-items: center;
   }
 }
 
@@ -27,6 +36,11 @@
   }
 }
 
+// -----------------------------------------------------------------------------
+// Stats
+// Two columns on phones; an odd last tile spans the row so there is no hole.
+// -----------------------------------------------------------------------------
+
 .stats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -43,7 +57,6 @@
   gap: 4px;
   text-align: center;
 
-  // The last tile spans the row on phones so the 2-column grid has no hole.
   &:last-child:nth-child(odd) {
     grid-column: 1 / -1;
 
@@ -57,14 +70,18 @@
   @include gradient-text;
   font-size: fluid(1.6rem, 2.2rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
 }
 
 .statLabel {
   font-size: 0.82rem;
   color: var(--color-text-subtle);
 }
+
+// -----------------------------------------------------------------------------
+// Techniques (each card has its own data-tone)
+// -----------------------------------------------------------------------------
 
 .subheading {
   margin: fluid(32px, 48px) 0 fluid(16px, 20px);
@@ -87,9 +104,9 @@
   width: 44px;
   height: 44px;
   margin-bottom: 16px;
-  border-radius: 14px;
-  background: var(--tone-soft);
   color: var(--tone);
+  background: var(--tone-soft);
+  border-radius: 14px;
 }
 
 .techniqueTitle {

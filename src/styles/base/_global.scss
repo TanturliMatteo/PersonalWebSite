@@ -1,32 +1,50 @@
+// =============================================================================
+// BASE · Global
+// Page-level styles: body, decorative background, headings, selection.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Body
+// 16px base: readable on phones and no iOS zoom when a field gets focus.
+// Side padding keeps content clear of the notch in landscape.
+// -----------------------------------------------------------------------------
+
 body {
+  padding-right: var(--safe-right);
+  padding-left: var(--safe-left);
   font-family: var(--font-sans);
-  font-size: 1rem; // never below 16px on phones: readable and no iOS zoom-on-focus
+  font-size: 1rem;
   color: var(--color-text);
   background: var(--color-bg);
-  // Keep content clear of the notch in landscape.
-  padding-left: var(--safe-left);
-  padding-right: var(--safe-right);
 }
 
-// Decorative gradient on a fixed layer. `background-attachment: fixed` is ignored by iOS
-// and repaints on every scroll on Android, so a fixed pseudo-element is used instead.
+// -----------------------------------------------------------------------------
+// Background gradient
+// On a fixed pseudo-element: `background-attachment: fixed` is ignored by iOS
+// and repaints on every scroll on Android.
+// -----------------------------------------------------------------------------
+
 body::before {
-  content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  content: '';
   background:
     radial-gradient(1200px 600px at 85% -10%, rgb(147 51 234 / 0.08), transparent 60%),
     radial-gradient(900px 500px at -10% 10%, rgb(79 70 229 / 0.08), transparent 60%);
 }
+
+// -----------------------------------------------------------------------------
+// Typography
+// `balance` evens heading lines, `pretty` avoids a single orphan word.
+// -----------------------------------------------------------------------------
 
 h1,
 h2,
 h3 {
   line-height: 1.15;
   letter-spacing: -0.02em;
-  // Even line lengths for headings on narrow screens (no single orphan word).
   text-wrap: balance;
 }
 

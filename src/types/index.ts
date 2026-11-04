@@ -18,15 +18,7 @@ export type IconName =
 
 export type Locale = 'en' | 'it'
 
-export type SectionId =
-  | 'home'
-  | 'about'
-  | 'skills'
-  | 'experience'
-  | 'education'
-  | 'projects'
-  | 'stack'
-  | 'contact'
+export type SectionId = 'home' | 'about' | 'skills' | 'experience' | 'education' | 'projects' | 'stack' | 'contact'
 
 /** Color families generated in styles/abstracts/_palette.scss. */
 export type Tone = 'indigo' | 'violet' | 'sky' | 'emerald' | 'amber'
@@ -89,7 +81,7 @@ export interface Content {
     closeMenu: string
     backToTop: string
     switchLanguage: string
-    scrollProgress: string
+    navLabel: string
   }
   hero: {
     greeting: string
@@ -138,6 +130,7 @@ export interface Content {
   footer: { builtWith: string; openTerminal: string }
   terminal: {
     title: string
+    close: string
     welcome: string
     placeholder: string
     notFound: string

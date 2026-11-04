@@ -1,6 +1,11 @@
+// =============================================================================
+// UI · Container
+// Centers content with the page max-width and fluid side gutters.
+// =============================================================================
+
 .container {
   width: 100%;
   max-width: calc(var(--container-width) + var(--container-gutter) * 2);
-  margin-inline: auto;
   padding-inline: var(--container-gutter);
+  margin-inline: auto;
 }

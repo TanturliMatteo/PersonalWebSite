@@ -1,39 +1,51 @@
+// =============================================================================
+// SECTION · ProjectCard
+// The wrapper is a size container: the card picks its layout from its own
+// width (container queries), not from the viewport. Featured cards span the
+// whole row, switch to the wide layout by themselves and get a comet border.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
-// Size container: everything below reacts to the CARD's width.
+// -----------------------------------------------------------------------------
+// Container
+// -----------------------------------------------------------------------------
+
 .container {
+  display: grid;
   container: project-card / inline-size;
-  display: grid; // lets the card stretch to the row height
 }
 
-// Featured projects take the whole row of the Projects grid.
 .featuredSlot {
   @include up(md) {
     grid-column: 1 / -1;
   }
 }
 
-// ---------------------------------------------------------------------------
-// Narrow layout (default): a vertical stack.
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Narrow layout (default): vertical stack
+// The last row is 1fr and the links align to its end, so buttons line up
+// across cards of different heights.
+// -----------------------------------------------------------------------------
+
 .card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto auto auto auto 1fr;
   grid-template-areas:
     'header'
     'name'
     'description'
     'tags'
     'links';
+  grid-template-rows: auto auto auto auto 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .header {
-  grid-area: header;
   display: flex;
+  grid-area: header;
+  gap: 12px;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
   margin-bottom: fluid(16px, 20px);
 }
 
@@ -42,9 +54,9 @@
   flex-shrink: 0;
   width: fluid(42px, 48px);
   height: fluid(42px, 48px);
-  border-radius: 14px;
-  background: var(--gradient-accent);
   color: #fff;
+  background: var(--gradient-accent);
+  border-radius: 14px;
 }
 
 .name {
@@ -64,13 +76,12 @@
   margin-top: fluid(16px, 20px);
 }
 
-// Last row is 1fr + align end: buttons line up across cards of different heights.
 .links {
-  grid-area: links;
-  align-self: end;
   display: flex;
   flex-wrap: wrap;
+  grid-area: links;
   gap: 8px;
+  align-self: end;
   padding-top: fluid(20px, 24px);
 
   > a {
@@ -78,27 +89,27 @@
   }
 }
 
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Container queries
-// ---------------------------------------------------------------------------
+// 420px: buttons stop stretching.
+// 640px: two columns, icon + badge on the left, content on the right.
+// -----------------------------------------------------------------------------
 
-// Medium card: buttons stop stretching.
 @include container-up(project-card, 420px) {
   .links > a {
     flex: 0 0 auto;
   }
 }
 
-// Wide card: two columns, icon + badge on the left, content on the right.
 @include container-up(project-card, 640px) {
   .card {
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-rows: auto auto auto 1fr;
     grid-template-areas:
       'header name'
       'header description'
       'header tags'
       'header links';
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     column-gap: 28px;
   }
 
@@ -120,21 +131,21 @@
   }
 }
 
-// ---------------------------------------------------------------------------
-// Featured: a streak of light travelling around the border. --angle is a
-// registered <angle> (@property in base/_properties), so it animates smoothly.
-// The normal border stays, the comet runs on top of it.
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Featured: comet border
+// A streak of light runs around the border by animating the registered
+// --angle. Children are lifted above the ::before ring. With reduced motion
+// the streak stays still and softer.
+// -----------------------------------------------------------------------------
+
 .featured {
   @include gradient-border(2px, (sky, indigo, violet), $style: 'comet');
 
-  // Content above the ::before ring.
   > * {
     position: relative;
     z-index: 1;
   }
 
-  // Reduced motion: a still, subtle highlight instead of the moving streak.
   &::before {
     opacity: 0.6;
   }

@@ -1,11 +1,16 @@
+// =============================================================================
+// ABSTRACTS · Effects
+// Modern CSS effects. All of them are progressive enhancements: browsers
+// without support, or users who asked for reduced motion, get the static site.
+// =============================================================================
+
 @use 'sass:list';
 @use 'sass:math';
 @use 'functions' as *;
 
-// ---------------------------------------------------------------------------
-// Feature gates: modern effects are progressive enhancements. Browsers without
-// support (or users who asked for reduced motion) simply get the static site.
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Feature gates
+// -----------------------------------------------------------------------------
 
 @mixin motion-ok {
   @media (prefers-reduced-motion: no-preference) {
@@ -21,33 +26,41 @@
   }
 }
 
-// Container query on a named container: @include container-up(card, 560px) { ... }
+// -----------------------------------------------------------------------------
+// Container queries
+// @include container-up(project-card, 640px) { ... } reacts to the width of
+// the named container, not to the viewport.
+// -----------------------------------------------------------------------------
+
 @mixin container-up($name, $min-width) {
   @container #{$name} (min-width: #{$min-width}) {
     @content;
   }
 }
 
-// ---------------------------------------------------------------------------
-// Gradient border drawn on ::before. The ring is cut out with a mask, so the
-// card keeps its own background and the border can be animated freely.
-// Rotate it by animating --angle (registered with @property in base/_properties).
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Gradient border
+// Drawn on ::before and cut into a ring with a mask, so the element keeps its
+// own background. Animate --angle (registered in base/_properties) to rotate it.
+//   $style: 'full'  -> tones spread around the whole ring
+//   $style: 'comet' -> a short streak with a fading tail, transparent elsewhere
+// -----------------------------------------------------------------------------
 
-//   $style: 'full'  -> the whole ring is colored (tones spread around it)
-//   $style: 'comet' -> a short bright streak with a fading tail, transparent elsewhere,
-//                      so the rotation is clearly visible.
-@mixin gradient-border($width: 2px, $tone-names: (indigo, violet, sky, indigo), $style: 'full') {
+$gradient-border-tones: (indigo, violet, sky, indigo);
+
+@mixin gradient-border($width: 2px, $tone-names: $gradient-border-tones, $style: 'full') {
   $stops: ();
 
   @if $style == 'comet' {
-    // Tail starts at 55% of the turn; the tones fill the last 45%, then a hard cut.
+    // The tail starts at 55% of the turn, the tones fill the rest, then a hard cut.
     $count: list.length($tone-names);
     $stops: (transparent 0%, transparent 55%);
+
     @for $i from 1 through $count {
       $position: 55% + math.div(43%, $count) * $i;
       $stops: list.append($stops, tone(list.nth($tone-names, $i)) $position, $separator: comma);
     }
+
     $stops: list.append($stops, transparent 100%, $separator: comma);
   } @else {
     @each $name in $tone-names {
@@ -56,16 +69,16 @@
   }
 
   &::before {
-    content: '';
     position: absolute;
     inset: -1px;
     z-index: 0;
     padding: $width;
-    border-radius: inherit;
+    pointer-events: none;
+    content: '';
     background: conic-gradient(from var(--angle), $stops);
+    border-radius: inherit;
     mask:
       linear-gradient(#000 0 0) content-box exclude,
       linear-gradient(#000 0 0);
-    pointer-events: none;
   }
 }

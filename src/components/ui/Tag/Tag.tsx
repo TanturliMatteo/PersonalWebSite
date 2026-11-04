@@ -15,7 +15,7 @@ export function Tag({ label, variant = 'neutral' }: TagProps) {
 interface TagListProps {
   items: string[]
   variant?: TagVariant
-  /** Tags pop in one after another on scroll, and wave when the parent is hovered. */
+  /** Tags pop in one after another on scroll and lift together when the parent is hovered. */
   stagger?: boolean
 }
 

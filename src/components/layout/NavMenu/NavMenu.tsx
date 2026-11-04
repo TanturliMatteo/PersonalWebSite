@@ -4,6 +4,8 @@ import styles from './NavMenu.module.scss'
 
 interface NavMenuProps {
   id: string
+  /** Accessible name of the navigation landmark. */
+  label: string
   items: { id: SectionId; label: string }[]
   activeId: string
   open: boolean
@@ -11,9 +13,9 @@ interface NavMenuProps {
   onNavigate: () => void
 }
 
-export function NavMenu({ id, items, activeId, open, onNavigate }: NavMenuProps) {
+export function NavMenu({ id, label, items, activeId, open, onNavigate }: NavMenuProps) {
   return (
-    <nav id={id} className={cx(styles.menu, open && styles.open)} inert={!open}>
+    <nav id={id} className={cx(styles.menu, open && styles.open)} aria-label={label} inert={!open}>
       <ol className={styles.list}>
         {items.map((item, index) => (
           <li key={item.id}>

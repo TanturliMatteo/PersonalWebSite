@@ -1,26 +1,24 @@
+// =============================================================================
+// ABSTRACTS · Mixins
+// Reusable style patterns. Every component imports them through
+// @use '@/styles/abstracts' as *;
+// =============================================================================
+
 @use 'sass:map';
 @use 'breakpoints' as *;
 
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Media queries
-// ---------------------------------------------------------------------------
+// `hover` applies only on devices that really hover (mouse / trackpad): on
+// touch screens :hover sticks after a tap, so every hover effect goes through it.
+// -----------------------------------------------------------------------------
 
-// Mobile-first: base styles target phones, @include up(md) { ... } layers on larger screens.
 @mixin up($bp) {
   @media (min-width: map.get($breakpoints, $bp)) {
     @content;
   }
 }
 
-// Escape hatch for the rare phone-only rule. Prefer `up()`.
-@mixin down($bp) {
-  @media (max-width: (map.get($breakpoints, $bp) - 0.02px)) {
-    @content;
-  }
-}
-
-// Hover styles only for devices that really hover (mouse / trackpad).
-// On touch screens :hover sticks after a tap, so every hover effect goes through this.
 @mixin hover {
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -29,30 +27,30 @@
   }
 }
 
-// Short landscape screens (phones turned sideways).
+// Phones turned sideways.
 @mixin landscape-short {
-  @media (orientation: landscape) and (max-height: 500px) {
+  @media (orientation: landscape) and (height <= 500px) {
     @content;
   }
 }
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Interaction
+// touch-target: 44x44px minimum (WCAG 2.5.5 / Apple HIG).
+// press: immediate feedback on tap, the touch replacement for hover.
+// -----------------------------------------------------------------------------
 
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// Minimum touch target (WCAG 2.5.5 / Apple HIG: 44x44px).
 @mixin touch-target($size: var(--touch-target)) {
   min-width: $size;
   min-height: $size;
 }
 
-// Visible keyboard focus ring, shared by every interactive element.
+@mixin press($scale: 0.97) {
+  &:active {
+    transform: scale($scale);
+  }
+}
+
 @mixin focus-ring {
   &:focus-visible {
     outline: 2px solid var(--color-accent);
@@ -60,18 +58,22 @@
   }
 }
 
-// Immediate press feedback, the touch replacement for hover.
-@mixin press($scale: 0.97) {
-  &:active {
-    transform: scale($scale);
-  }
+// -----------------------------------------------------------------------------
+// Layout
+// -----------------------------------------------------------------------------
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Surfaces
-// ---------------------------------------------------------------------------
+// card-surface is the rounded base of every card; card-hover adds the lift
+// (pointer devices only).
+// -----------------------------------------------------------------------------
 
-// Base surface for every rounded card in the site.
 @mixin card-surface {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -79,7 +81,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-// Lift effect, pointer devices only.
 @mixin card-hover {
   transition:
     transform var(--transition),
@@ -87,17 +88,10 @@
     border-color var(--transition);
 
   @include hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
     border-color: var(--color-accent-soft-border);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
   }
-}
-
-@mixin gradient-text {
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 @mixin glass {
@@ -105,7 +99,14 @@
 
   @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
     background: rgb(255 255 255 / 0.72);
-    backdrop-filter: saturate(180%) blur(14px);
     -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
   }
+}
+
+@mixin gradient-text {
+  color: transparent;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
 }

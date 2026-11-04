@@ -1,38 +1,47 @@
+// =============================================================================
+// BASE · Design tokens
+// Runtime CSS custom properties. Phone values first; spacing is fluid, so
+// components rarely need breakpoints for it.
+// =============================================================================
+
 @use '../abstracts' as *;
 
-// Runtime design tokens (CSS custom properties).
-// Phone values first; spacing is fluid so components rarely need breakpoints for it.
 :root {
-  // Colors
+  // ---------------------------------------------------------------------------
+  // Colors (the accent comes from the palette map)
+  // ---------------------------------------------------------------------------
   --color-bg: #f6f7fb;
-  --color-surface: #ffffff;
+  --color-surface: #fff;
   --color-surface-muted: #f1f2f8;
   --color-border: #e6e8f0;
   --color-text: #12131a;
   --color-text-muted: #5b6072;
-  --color-text-subtle: #737890; // 4.5:1 on white, readable outdoors on phones
-  // Accent derived from the palette map (abstracts/_palette.scss)
+  --color-text-subtle: #737890;
   --color-accent: #{tone(indigo)};
   --color-accent-strong: #4338ca;
   --color-accent-soft: #eef0ff;
   --color-accent-soft-border: #c7cbff;
   --gradient-accent: linear-gradient(135deg, #{tone(indigo)} 0%, #{tone(violet)} 100%);
 
+  // ---------------------------------------------------------------------------
   // Typography
+  // ---------------------------------------------------------------------------
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
 
-  // Shape
+  // ---------------------------------------------------------------------------
+  // Shape and elevation
+  // ---------------------------------------------------------------------------
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: #{fluid(18px, 24px)};
   --radius-pill: 999px;
-
-  // Elevation
   --shadow-sm: 0 1px 2px rgb(18 19 26 / 0.04), 0 4px 16px rgb(18 19 26 / 0.04);
   --shadow-lg: 0 2px 4px rgb(18 19 26 / 0.04), 0 16px 40px rgb(79 70 229 / 0.12);
 
+  // ---------------------------------------------------------------------------
   // Layout (fluid between 360px and 1280px viewports)
+  // ---------------------------------------------------------------------------
   --container-width: 1080px;
   --container-gutter: #{fluid(16px, 32px)};
   --header-height: 64px;
@@ -42,13 +51,17 @@
   --card-padding-lg: #{fluid(22px, 40px)};
   --touch-target: 44px;
 
-  // Notch / home-indicator insets (need viewport-fit=cover in index.html)
+  // ---------------------------------------------------------------------------
+  // Safe areas: notch and home indicator (needs viewport-fit=cover)
+  // ---------------------------------------------------------------------------
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
 
+  // ---------------------------------------------------------------------------
   // Motion
+  // ---------------------------------------------------------------------------
   --transition: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
   @include up(md) {

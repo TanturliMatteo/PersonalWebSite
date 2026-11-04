@@ -17,7 +17,7 @@ export const en: Content = {
     closeMenu: 'Close menu',
     backToTop: 'Back to top',
     switchLanguage: 'Language',
-    scrollProgress: 'Page scroll progress',
+    navLabel: 'Sections',
   },
   hero: {
     greeting: 'Hi, I’m',
@@ -168,6 +168,7 @@ export const en: Content = {
   },
   terminal: {
     title: 'matteo@portfolio: ~',
+    close: 'Close terminal',
     welcome: 'Welcome! Type `help` to see the available commands.',
     placeholder: 'type a command…',
     notFound: 'command not found: {cmd}. Try `help`.',
@@ -182,11 +183,7 @@ export const en: Content = {
       clear: 'clear the screen',
       exit: 'close the terminal',
     },
-    hire: [
-      '[sudo] password for recruiter: ********',
-      'Access granted. ✔',
-      'Opening your email client to hire Matteo…',
-    ],
+    hire: ['[sudo] password for recruiter: ********', 'Access granted. ✔', 'Opening your email client to hire Matteo…'],
     goto: 'Scrolling to {section}…',
     gotoUsage: 'usage: goto <section>. Sections: {list}',
     langSwitched: 'Language set to English.',

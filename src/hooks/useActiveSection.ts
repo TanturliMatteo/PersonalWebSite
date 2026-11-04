@@ -8,9 +8,7 @@ export function useActiveSection(ids: string[]): string {
   const [activeId, setActiveId] = useState(ids[0] ?? '')
 
   useEffect(() => {
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null)
+    const elements = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null)
 
     const observer = new IntersectionObserver(
       (entries) => {

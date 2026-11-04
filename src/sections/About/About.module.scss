@@ -1,4 +1,14 @@
+// =============================================================================
+// SECTION · About
+// Bio card + quick facts. Facts: one column on phones, side by side on
+// tablets, stacked next to the bio on desktop.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
+
+// -----------------------------------------------------------------------------
+// Layout
+// -----------------------------------------------------------------------------
 
 .grid {
   display: grid;
@@ -9,21 +19,6 @@
   }
 }
 
-.bio {
-  display: grid;
-  align-content: center;
-  gap: 14px;
-  font-size: fluid(1rem, 1.08rem);
-  color: var(--color-text-muted);
-
-  p:first-child {
-    font-size: fluid(1.1rem, 1.2rem);
-    font-weight: 600;
-    color: var(--color-text);
-  }
-}
-
-// Phones: one column. Tablets: facts side by side. Desktop: stacked next to the bio.
 .facts {
   display: grid;
   gap: var(--grid-gap);
@@ -37,10 +32,32 @@
   }
 }
 
+// -----------------------------------------------------------------------------
+// Bio
+// -----------------------------------------------------------------------------
+
+.bio {
+  display: grid;
+  gap: 14px;
+  align-content: center;
+  font-size: fluid(1rem, 1.08rem);
+  color: var(--color-text-muted);
+
+  p:first-child {
+    font-size: fluid(1.1rem, 1.2rem);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Fact cards
+// -----------------------------------------------------------------------------
+
 .fact {
   display: flex;
-  align-items: flex-start;
   gap: 14px;
+  align-items: flex-start;
 }
 
 .factIcon {
@@ -48,17 +65,17 @@
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  border-radius: 14px;
-  background: var(--color-accent-soft);
   color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 14px;
 }
 
 .factLabel {
   font-size: 0.78rem;
   font-weight: 600;
+  color: var(--color-text-subtle);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--color-text-subtle);
 }
 
 .factValue {

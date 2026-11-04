@@ -114,7 +114,7 @@ export function Terminal() {
             <span />
           </span>
           <span className={styles.title}>{t.terminal.title}</span>
-          <button type="button" className={styles.close} onClick={close} aria-label="Close">
+          <button type="button" className={styles.close} onClick={close} aria-label={t.terminal.close}>
             <Icon name="close" size={18} />
           </button>
         </header>

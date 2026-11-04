@@ -1,9 +1,14 @@
+// =============================================================================
+// BASE · Tones
+// One theme per palette entry, generated with @each:
+//   <div data-tone="emerald"> -> --tone, --tone-strong, --tone-soft, --tone-border
+// Components read var(--tone, var(--color-accent)), so they work with or
+// without a tone.
+// =============================================================================
+
 @use 'sass:color';
 @use '../abstracts' as *;
 
-// Generates one theme per palette entry:
-//   <div data-tone="emerald"> -> --tone, --tone-strong, --tone-soft, --tone-border
-// Components read var(--tone, var(--color-accent)) so they work with or without a tone.
 @each $name, $color in $tones {
   [data-tone='#{$name}'] {
     --tone: #{$color};

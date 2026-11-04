@@ -1,7 +1,10 @@
-// Typed custom properties. Registering a type is what makes them ANIMATABLE:
-// an unregistered custom property can only jump between values, a registered
-// <angle> interpolates smoothly (used by the rotating gradient borders).
+// =============================================================================
+// BASE · Registered custom properties
+// Registering a type is what makes a custom property ANIMATABLE: an untyped
+// one can only jump between values, a registered <angle> interpolates.
+// =============================================================================
 
+// Rotation of the gradient borders (mixin gradient-border).
 @property --angle {
   syntax: '<angle>';
   inherits: false;

@@ -17,7 +17,7 @@ export const it: Content = {
     closeMenu: 'Chiudi il menu',
     backToTop: 'Torna su',
     switchLanguage: 'Lingua',
-    scrollProgress: 'Avanzamento della pagina',
+    navLabel: 'Sezioni',
   },
   hero: {
     greeting: 'Ciao, sono',
@@ -168,6 +168,7 @@ export const it: Content = {
   },
   terminal: {
     title: 'matteo@portfolio: ~',
+    close: 'Chiudi il terminale',
     welcome: 'Benvenuto! Scrivi `help` per vedere i comandi disponibili.',
     placeholder: 'scrivi un comando…',
     notFound: 'comando non trovato: {cmd}. Prova `help`.',

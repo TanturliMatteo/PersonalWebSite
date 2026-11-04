@@ -50,7 +50,11 @@ export function runCommand(raw: string, { t }: Context): CommandResult {
 
     case 'whoami':
       return {
-        lines: [out(`${profile.name} · ${t.hero.role}`, 'success'), out(t.location, 'muted'), out(t.about.paragraphs[0])],
+        lines: [
+          out(`${profile.name} · ${t.hero.role}`, 'success'),
+          out(t.location, 'muted'),
+          out(t.about.paragraphs[0]),
+        ],
       }
 
     case 'skills':
@@ -68,7 +72,10 @@ export function runCommand(raw: string, { t }: Context): CommandResult {
 
     case 'contact':
       return {
-        lines: [out(`email     ${profile.email}`), ...socials.map((s) => out(`${s.label.toLowerCase().padEnd(10)}${s.href}`))],
+        lines: [
+          out(`email     ${profile.email}`),
+          ...socials.map((s) => out(`${s.label.toLowerCase().padEnd(10)}${s.href}`)),
+        ],
       }
 
     case 'ls':
@@ -80,7 +87,10 @@ export function runCommand(raw: string, { t }: Context): CommandResult {
       if (!isSectionId(target)) {
         return { lines: [out(format(term.gotoUsage, { list: sectionIds.join(', ') }), 'error')] }
       }
-      return { lines: [out(format(term.goto, { section: t.nav[target] }), 'muted')], action: { type: 'goto', id: target } }
+      return {
+        lines: [out(format(term.goto, { section: t.nav[target] }), 'muted')],
+        action: { type: 'goto', id: target },
+      }
     }
 
     case 'lang': {

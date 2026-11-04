@@ -1,7 +1,12 @@
+// =============================================================================
+// FEATURE · Terminal
+// Dark window in a native <dialog>: the one place where the light site
+// "drops into" the shell. The input is 16px so iOS does not zoom on focus.
+// =============================================================================
+
 @use 'sass:list';
 @use '@/styles/abstracts' as *;
 
-// Dark window on purpose: the one place where the light site "drops into" the shell.
 $bg: #0f1020;
 $bar: #181a2e;
 $text: #e4e6f5;
@@ -10,15 +15,19 @@ $green: color-mix(in srgb, #{tone(emerald)} 60%, white);
 $red: #ff8a8a;
 $window-buttons: (#ff5f57, #febc2e, #28c840);
 
+// -----------------------------------------------------------------------------
+// Dialog and window
+// -----------------------------------------------------------------------------
+
 .dialog {
   width: min(720px, calc(100vw - var(--container-gutter) * 2));
   max-width: none;
   max-height: none;
-  margin: auto;
   padding: 0;
-  border: 0;
-  background: transparent;
+  margin: auto;
   overflow: visible;
+  background: transparent;
+  border: 0;
 
   &::backdrop {
     background: rgb(15 16 32 / 0.45);
@@ -32,24 +41,36 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
   }
 }
 
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 12px;
+  }
+}
+
 .window {
   display: flex;
   flex-direction: column;
   height: min(480px, calc(100dvh - 48px));
-  border-radius: var(--radius-lg);
-  background: $bg;
-  color: $text;
+  overflow: hidden;
   font-family: var(--font-mono);
+  color: $text;
+  background: $bg;
+  border-radius: var(--radius-lg);
   box-shadow:
     0 30px 80px rgb(15 16 32 / 0.45),
     0 0 0 1px rgb(255 255 255 / 0.06);
-  overflow: hidden;
 }
+
+// -----------------------------------------------------------------------------
+// Title bar (traffic-light colors generated from a Sass list)
+// -----------------------------------------------------------------------------
 
 .titleBar {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: center;
   padding: 6px 6px 6px 16px;
   background: $bar;
 }
@@ -64,7 +85,6 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
     border-radius: 50%;
   }
 
-  // Traffic-light colors generated from a Sass list.
   @each $color in $window-buttons {
     span:nth-child(#{list.index($window-buttons, $color)}) {
       background: $color;
@@ -75,10 +95,10 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
 .title {
   flex: 1;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 0.8rem;
   color: $muted;
   text-align: center;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -86,8 +106,8 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
   @include flex-center;
   @include touch-target;
   @include focus-ring;
-  border-radius: var(--radius-sm);
   color: $muted;
+  border-radius: var(--radius-sm);
 
   @include hover {
     color: $text;
@@ -95,17 +115,21 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
   }
 }
 
+// -----------------------------------------------------------------------------
+// Output and prompt
+// -----------------------------------------------------------------------------
+
 .output {
   flex: 1;
+  padding: 16px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 16px;
   font-size: 0.875rem;
   line-height: 1.7;
 
   p {
-    white-space: pre-wrap;
     overflow-wrap: anywhere;
+    white-space: pre-wrap;
   }
 }
 
@@ -116,27 +140,30 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
 
 .inputRow {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 }
 
 .field {
   flex: 1;
   min-width: 0;
-  border: 0;
+  font-family: inherit;
+  font-size: 16px;
+  color: $text;
+  caret-color: $green;
   outline: 0;
   background: transparent;
-  color: $text;
-  font-family: inherit;
-  font-size: 16px; // 16px = no auto-zoom on iOS when the field gets focus
-  caret-color: $green;
+  border: 0;
 
   &::placeholder {
     color: rgb(139 143 179 / 0.6);
   }
 }
 
-// One class per Line kind (see commands.ts).
+// -----------------------------------------------------------------------------
+// Line kinds (one class per `LineKind` in commands.ts)
+// -----------------------------------------------------------------------------
+
 .lineInput,
 .lineOutput {
   color: $text;
@@ -152,12 +179,4 @@ $window-buttons: (#ff5f57, #febc2e, #28c840);
 
 .lineSuccess {
   color: $green;
-}
-
-@keyframes pop {
-  from {
-    opacity: 0;
-    scale: 0.96;
-    translate: 0 12px;
-  }
 }

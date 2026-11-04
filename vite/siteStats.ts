@@ -31,7 +31,11 @@ function collectSourceStats(root: string): SourceStats {
     .reduce((sum, file) => sum + (readFileSync(file, 'utf8').match(/export function [A-Z]/g)?.length ?? 0), 0)
 
   const linesOfCode = code.reduce(
-    (sum, file) => sum + readFileSync(file, 'utf8').split('\n').filter((line) => line.trim() !== '').length,
+    (sum, file) =>
+      sum +
+      readFileSync(file, 'utf8')
+        .split('\n')
+        .filter((line) => line.trim() !== '').length,
     0,
   )
 

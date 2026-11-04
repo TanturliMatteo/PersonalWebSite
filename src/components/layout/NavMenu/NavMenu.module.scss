@@ -1,21 +1,30 @@
+// =============================================================================
+// LAYOUT · NavMenu
+// Dropdown under the hamburger. Never taller than the visible viewport
+// (landscape phones): it scrolls inside, without scrolling the page behind.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
+
+// -----------------------------------------------------------------------------
+// Panel
+// -----------------------------------------------------------------------------
 
 .menu {
   @include card-surface;
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
-  width: min(300px, calc(100vw - var(--container-gutter) * 2 - var(--safe-left) - var(--safe-right)));
-  // Never taller than the visible viewport (landscape phones): scroll inside instead.
-  max-height: calc(100dvh - var(--header-height) - var(--safe-top) - 24px);
-  overflow-y: auto;
-  overscroll-behavior: contain; // scrolling the menu does not scroll the page behind
-  padding: 8px;
-  box-shadow: var(--shadow-lg);
-  transform-origin: top right;
-  opacity: 0;
   visibility: hidden;
+  width: min(300px, calc(100vw - var(--container-gutter) * 2 - var(--safe-left) - var(--safe-right)));
+  max-height: calc(100dvh - var(--header-height) - var(--safe-top) - 24px);
+  padding: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
   transform: translateY(-8px) scale(0.97);
+  transform-origin: top right;
   transition:
     opacity var(--transition),
     transform var(--transition),
@@ -23,10 +32,14 @@
 }
 
 .open {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
   transform: none;
 }
+
+// -----------------------------------------------------------------------------
+// Links (48px tall: comfortable thumb targets)
+// -----------------------------------------------------------------------------
 
 .list {
   display: grid;
@@ -36,20 +49,20 @@
 .link {
   @include focus-ring;
   display: flex;
-  align-items: center;
   gap: 14px;
-  min-height: 48px; // comfortable thumb target for a list of links
+  align-items: center;
+  min-height: 48px;
   padding: 10px 14px;
-  border-radius: var(--radius-md);
   font-weight: 600;
   color: var(--color-text-muted);
+  border-radius: var(--radius-md);
   transition:
     background-color var(--transition),
     color var(--transition);
 
   @include hover {
-    background: var(--color-surface-muted);
     color: var(--color-text);
+    background: var(--color-surface-muted);
   }
 
   &:active {
@@ -67,8 +80,8 @@
   &,
   &:hover,
   &:active {
-    background: var(--color-accent-soft);
     color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
   }
 
   .index {

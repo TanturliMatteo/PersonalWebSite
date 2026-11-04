@@ -1,16 +1,26 @@
+// =============================================================================
+// LAYOUT · ScrollRing
+// SVG ring around the menu toggle, drawn by the root scroll timeline.
+// The box is exactly the SVG geometry: 46px button + 4px gap per side = 54px,
+// offset by -5px because absolute positioning starts inside the 1px border.
+// `max-width: none` overrides the reset, which would cap the SVG at 46px.
+// Hidden in browsers without scroll-driven animations.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
-// Hidden unless the browser supports scroll-driven animations.
+// -----------------------------------------------------------------------------
+// Ring
+// -----------------------------------------------------------------------------
+
 .ring {
-  display: none;
-  // Exact box matching the SVG geometry: 46px button + 4px gap per side = 54px.
-  // Offsets are -5px because absolute positioning starts inside the button's 1px border.
   position: absolute;
   top: -5px;
   left: -5px;
+  display: none;
   width: 54px;
+  max-width: none;
   height: 54px;
-  max-width: none; // the global reset caps svg at 100% of the parent (46px), which shifted the ring
   overflow: visible;
   pointer-events: none;
 }
@@ -21,8 +31,8 @@
 }
 
 .track {
-  stroke: var(--color-border);
   opacity: 0.6;
+  stroke: var(--color-border);
 }
 
 .progress {
@@ -30,6 +40,12 @@
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
 }
+
+// -----------------------------------------------------------------------------
+// Scroll-driven drawing
+// pathLength="100" on the rect: dashoffset 100 -> 0 is 0% -> 100% of the real
+// perimeter, corners included.
+// -----------------------------------------------------------------------------
 
 @include supports-scroll-timeline {
   .ring {

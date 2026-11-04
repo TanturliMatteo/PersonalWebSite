@@ -1,5 +1,8 @@
+// =============================================================================
 // Global stylesheet, imported once in main.tsx.
 // Component styles live next to their component as *.module.scss.
+// =============================================================================
+
 @use 'base/properties';
 @use 'base/tokens';
 @use 'base/tones';

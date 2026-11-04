@@ -1,9 +1,15 @@
+// =============================================================================
+// UI · Card
+// The rounded surface every block of the site is built on.
+// `min-width: 0` lets cards shrink inside grid / flex parents on narrow screens.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
 .card {
   @include card-surface;
   position: relative;
-  min-width: 0; // lets cards shrink inside grid / flex parents on narrow screens
+  min-width: 0;
 }
 
 .md {

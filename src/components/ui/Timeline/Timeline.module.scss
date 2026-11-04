@@ -1,7 +1,16 @@
+// =============================================================================
+// UI · Timeline
+// Vertical list of cards linked by a line. Markers are smaller on phones to
+// leave more width for the text.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
+// -----------------------------------------------------------------------------
+// Track and markers
+// -----------------------------------------------------------------------------
+
 .timeline {
-  // Smaller markers on phones leave more width for the card text.
   --marker-size: 32px;
   position: relative;
   display: grid;
@@ -11,16 +20,16 @@
     --marker-size: 40px;
   }
 
-  // Vertical line connecting the markers.
+  // Line connecting the markers.
   &::before {
-    content: '';
     position: absolute;
     top: 8px;
     bottom: 8px;
     left: calc(var(--marker-size) / 2 - 1px);
     width: 2px;
-    border-radius: 2px;
+    content: '';
     background: linear-gradient(var(--color-accent-soft-border), transparent);
+    border-radius: 2px;
   }
 }
 
@@ -37,10 +46,10 @@
   width: var(--marker-size);
   height: var(--marker-size);
   margin-top: fluid(18px, 24px);
-  border-radius: 50%;
+  color: var(--color-accent);
   background: var(--color-surface);
   border: 2px solid var(--color-accent-soft-border);
-  color: var(--color-accent);
+  border-radius: 50%;
 
   svg {
     width: 55%;
@@ -48,12 +57,16 @@
   }
 }
 
+// -----------------------------------------------------------------------------
+// Entry content
+// -----------------------------------------------------------------------------
+
 .header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
   gap: 10px 24px;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .title {
@@ -68,15 +81,15 @@
 }
 
 .location {
-  color: var(--color-text-subtle);
   font-weight: 400;
+  color: var(--color-text-subtle);
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 8px 10px;
+  align-items: center;
 }
 
 .period {
@@ -101,15 +114,16 @@
     position: relative;
     padding-left: 20px;
 
+    // Gradient bullet.
     &::before {
-      content: '';
       position: absolute;
-      left: 2px;
       top: 0.65em;
+      left: 2px;
       width: 7px;
       height: 7px;
-      border-radius: 50%;
+      content: '';
       background: var(--gradient-accent);
+      border-radius: 50%;
     }
   }
 }

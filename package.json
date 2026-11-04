@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "oxlint && stylelint \"src/**/*.scss\"",
+    "lint:fix": "oxlint --fix && stylelint \"src/**/*.scss\" --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -19,7 +22,11 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "oxlint": "^1.89.0",
+    "prettier": "^3.9.10",
     "sass-embedded": "^1.107.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-recess-order": "^7.10.0",
+    "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "~7.0.2",
     "vite": "^8.3.5"
   }

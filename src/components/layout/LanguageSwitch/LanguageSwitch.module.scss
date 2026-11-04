@@ -1,3 +1,9 @@
+// =============================================================================
+// LAYOUT · LanguageSwitch
+// Segmented IT / EN control. The gradient pill slides behind the active option,
+// driven by --active and --count (set inline from React).
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
 $option-width: 44px;
@@ -11,30 +17,31 @@ $option-width: 44px;
   padding: 4px;
   border-radius: var(--radius-pill);
 
-  // Sliding pill behind the active option, moved by --active (set inline from React).
+  // Sliding pill.
   &::before {
-    content: '';
     position: absolute;
     top: 4px;
     bottom: 4px;
     left: 4px;
     width: $option-width;
-    border-radius: var(--radius-pill);
+    content: '';
     background: var(--gradient-accent);
+    border-radius: var(--radius-pill);
     box-shadow: 0 4px 12px rgb(79 70 229 / 0.3);
     translate: calc(var(--active) * 100%) 0;
     transition: translate var(--transition);
   }
 }
 
+// position: relative keeps the label above the pill.
 .option {
   @include focus-ring;
-  position: relative; // above the pill
-  border-radius: var(--radius-pill);
+  position: relative;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--color-text-muted);
+  border-radius: var(--radius-pill);
   transition: color var(--transition);
 
   @include hover {

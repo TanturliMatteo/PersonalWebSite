@@ -1,10 +1,14 @@
+// =============================================================================
+// BASE · Scroll reveal
+// Any element with [data-reveal] fades and rises into place while it enters
+// the viewport. Progress is tied to the element's position (view timeline),
+// not to time: no JavaScript, no IntersectionObserver.
+// Global on purpose, because CSS modules would rename the keyframes per file.
+// Uses `translate` / `scale`, so it never conflicts with hover `transform`s.
+// =============================================================================
+
 @use '../abstracts' as *;
 
-// Scroll-driven reveal. Any element with [data-reveal] fades and rises into place
-// as it enters the viewport: the animation progress is tied to the element's
-// position (view timeline), not to time, so no JavaScript / IntersectionObserver.
-// Global on purpose: CSS modules would rename the keyframes per file.
-// `translate` / `scale` are used instead of `transform` so they combine with hover lifts.
 @include supports-scroll-timeline {
   [data-reveal] {
     animation: reveal linear both;
@@ -16,13 +20,13 @@
 @keyframes reveal {
   from {
     opacity: 0;
-    translate: 0 40px;
     scale: 0.97;
+    translate: 0 40px;
   }
 
   to {
     opacity: 1;
-    translate: 0 0;
     scale: 1;
+    translate: 0 0;
   }
 }

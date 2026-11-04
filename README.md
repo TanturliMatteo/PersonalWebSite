@@ -5,10 +5,12 @@ in Italian and English.
 
 ```bash
 npm install
-npm run dev       # dev server
-npm run build     # typecheck + production build (dist/)
-npm run lint      # oxlint
-npm run preview   # preview the production build
+npm run dev           # dev server
+npm run build         # typecheck + production build (dist/)
+npm run preview       # preview the production build
+npm run lint          # oxlint (TS) + stylelint (SCSS: rules + property order)
+npm run lint:fix      # same, with automatic fixes
+npm run format        # prettier
 ```
 
 ## Project structure
@@ -36,7 +38,7 @@ src/
 │   │   ├── Card/            #   rounded surface; `tone` and `reveal` props
 │   │   ├── Container/  Icon/  Section/  Tag/  Timeline/
 │   └── layout/              # page chrome
-│       ├── Header/          #   glass header + hamburger with scroll-progress ring
+│       ├── Header/          #   glass header + hamburger, ScrollRing (scroll-progress SVG)
 │       ├── LanguageSwitch/  #   IT / EN segmented control
 │       ├── NavMenu/         #   dropdown that scrolls to sections
 │       └── Footer/
@@ -61,7 +63,7 @@ src/
     │   ├── _effects.scss    #   motion-ok, supports-scroll-timeline, container-up, gradient-border
     │   └── _breakpoints.scss
     ├── base/
-    │   ├── _properties.scss #   @property --angle, --scroll-progress (animatable custom props)
+    │   ├── _properties.scss #   @property --angle (animatable custom property)
     │   ├── _tokens.scss     #   CSS variables (colors, spacing, radii, safe areas)
     │   ├── _tones.scss      #   [data-tone='…'] themes generated with @each from the palette
     │   ├── _motion.scss     #   [data-reveal] scroll-driven reveal
@@ -72,6 +74,11 @@ src/
 ## Conventions
 
 - Each component lives in its own folder: `Name.tsx` + `Name.module.scss` + `index.ts`.
+- Every SCSS file opens with a `// ====` header saying what it is for; macro blocks are
+  separated by `// ----` headers, and explanations live in those headers, not between properties.
+- SCSS property order is enforced by stylelint (recess order: positioning → box model →
+  typography → visual → animation). `npm run lint:fix` sorts it automatically.
+- Formatting is Prettier (`.prettierrc.json`): single quotes, no semicolons, 120 columns.
 - Import through barrels and the `@/` alias: `import { Card, Section } from '@/components/ui'`.
 - No text in components: every string comes from `useLocale().t`.
 - Colors, radii, shadows and spacing are CSS variables in `styles/base/_tokens.scss`.
@@ -93,15 +100,15 @@ missing string), and register it in `data/index.ts`. The switch picks it up auto
 All of them are progressive enhancements: browsers without support, or users with
 `prefers-reduced-motion`, get the plain static site.
 
-| Feature | Where |
-| --- | --- |
-| Scroll-driven reveal (`animation-timeline: view()`) | `base/_motion.scss`, any `[data-reveal]` |
-| Scroll progress ring (`scroll(root)` + SVG `pathLength`) | `layout/Header/ScrollRing` |
-| Comet streak around featured cards (`@property --angle`) | `Projects/ProjectCard`, mixin `gradient-border` |
-| Container queries | `Projects/ProjectCard` |
-| Compile-time parallax spheres (`math.random()`) | `Hero`, function `particles()` |
-| Staggered tags (`@for` → per-item `animation-range` / `transition-delay`) | `ui/Tag`, `<TagList stagger>` |
-| Generated color themes (`@each` + `sass:color`) | `base/_tones.scss` |
+| Feature                                                                   | Where                                           |
+| ------------------------------------------------------------------------- | ----------------------------------------------- |
+| Scroll-driven reveal (`animation-timeline: view()`)                       | `base/_motion.scss`, any `[data-reveal]`        |
+| Scroll progress ring (`scroll(root)` + SVG `pathLength`)                  | `layout/Header/ScrollRing`                      |
+| Comet streak around featured cards (`@property --angle`)                  | `Projects/ProjectCard`, mixin `gradient-border` |
+| Container queries                                                         | `Projects/ProjectCard`                          |
+| Compile-time parallax spheres (`math.random()`)                           | `Hero`, function `particles()`                  |
+| Staggered tags (`@for` → per-item `animation-range` / `transition-delay`) | `ui/Tag`, `<TagList stagger>`                   |
+| Generated color themes (`@each` + `sass:color`)                           | `base/_tones.scss`                              |
 
 ## Mobile rules
 

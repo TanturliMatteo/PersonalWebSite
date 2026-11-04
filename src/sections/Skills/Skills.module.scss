@@ -1,3 +1,9 @@
+// =============================================================================
+// SECTION · Skills
+// One card per skill group, each in its own tone (data-tone): a top accent
+// bar and a square bullet before the title.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
 .grid {
@@ -9,32 +15,31 @@
   }
 }
 
-// Top accent bar in the card's tone.
 .card {
   overflow: hidden;
 
   &::after {
-    content: '';
     position: absolute;
     inset: 0 0 auto;
     height: 4px;
+    content: '';
     background: linear-gradient(90deg, var(--tone), var(--tone-border));
   }
 }
 
 .title {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
   margin-bottom: 14px;
   font-size: 1.05rem;
   font-weight: 700;
 
   &::before {
-    content: '';
     width: 10px;
     height: 10px;
-    border-radius: 3px;
+    content: '';
     background: var(--tone);
+    border-radius: 3px;
   }
 }

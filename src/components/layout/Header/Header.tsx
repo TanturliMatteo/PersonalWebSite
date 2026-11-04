@@ -45,7 +45,14 @@ export function Header() {
               <ScrollRing />
             </button>
 
-            <NavMenu id="site-menu" items={items} activeId={activeId} open={open} onNavigate={close} />
+            <NavMenu
+              id="site-menu"
+              label={t.header.navLabel}
+              items={items}
+              activeId={activeId}
+              open={open}
+              onNavigate={close}
+            />
           </div>
         </div>
       </Container>

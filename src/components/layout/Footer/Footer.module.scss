@@ -1,20 +1,25 @@
+// =============================================================================
+// LAYOUT · Footer
+// Centered and stacked on phones, one row from `sm`. The bottom padding
+// keeps it clear of the iPhone home indicator.
+// =============================================================================
+
 @use '@/styles/abstracts' as *;
 
 .footer {
-  margin-top: calc(var(--section-gap) / 2);
   padding-top: 24px;
-  // Clear of the iPhone home indicator.
   padding-bottom: calc(24px + var(--safe-bottom));
-  border-top: 1px solid var(--color-border);
+  margin-top: calc(var(--section-gap) / 2);
   font-size: 0.9rem;
   color: var(--color-text-subtle);
+  border-top: 1px solid var(--color-border);
 }
 
 .inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   text-align: center;
 
   @include up(sm) {
@@ -27,20 +32,20 @@
 .links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 4px 12px;
+  justify-content: center;
 }
 
 .link {
   @include focus-ring;
   @include touch-target;
   display: inline-flex;
-  align-items: center;
   gap: 6px;
+  align-items: center;
   padding-inline: 8px;
-  border-radius: var(--radius-sm);
   font-weight: 600;
   color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
   transition: color var(--transition);
 
   @include hover {

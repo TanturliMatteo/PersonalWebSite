@@ -1,0 +1,38 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-recess-order"],
+  "rules": {
+    "selector-class-pattern": [
+      "^[a-z][a-zA-Z0-9]*$",
+      {
+        "message": "Use camelCase class names (CSS modules are read as styles.camelCase)"
+      }
+    ],
+    "scss/dollar-variable-pattern": "^-?[a-z][a-z0-9-]*$",
+    "scss/at-mixin-pattern": "^-?[a-z][a-z0-9-]*$",
+    "scss/at-function-pattern": "^-?[a-z][a-z0-9-]*$",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "property-no-vendor-prefix": null,
+    "alpha-value-notation": "number",
+    "declaration-empty-line-before": null,
+    "custom-property-empty-line-before": null,
+    "scss/double-slash-comment-empty-line-before": null,
+    "declaration-block-no-redundant-longhand-properties": [
+      true,
+      {
+        "ignoreShorthands": ["grid-template", "inset"]
+      }
+    ],
+    "container-name-pattern": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreProperties": ["/^--font/"]
+      }
+    ]
+  }
+}

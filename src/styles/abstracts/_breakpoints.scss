@@ -1,4 +1,9 @@
-// Breakpoints (mobile-first). Used through the `up` mixin.
+// =============================================================================
+// ABSTRACTS · Breakpoints
+// Mobile-first: base styles target phones, larger screens are layered on top
+// with @include up(sm | md | lg | xl).
+// =============================================================================
+
 $breakpoints: (
   sm: 640px,
   md: 768px,
