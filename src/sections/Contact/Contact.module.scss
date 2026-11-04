@@ -1,0 +1,77 @@
+@use '@/styles/abstracts' as *;
+
+.panel {
+  display: grid;
+  gap: 32px;
+  overflow: hidden;
+
+  @include up(lg) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+  }
+}
+
+.intro {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  @include focus-ring;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  border: 1px solid transparent;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+a.item:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-soft-border);
+}
+
+.icon {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.text {
+  display: grid;
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-subtle);
+}
+
+.value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--color-text);
+}

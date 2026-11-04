@@ -1,0 +1,26 @@
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-text);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgb(147 51 234 / 0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgb(79 70 229 / 0.08), transparent 60%),
+    var(--color-bg);
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--color-accent-soft-border);
+}
+
+// Every section anchor lands below the fixed header.
+section[id] {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}

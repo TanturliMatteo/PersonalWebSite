@@ -1,0 +1,22 @@
+@use '@/styles/abstracts' as *;
+
+.card {
+  @include card-surface;
+  position: relative;
+}
+
+.md {
+  padding: 24px;
+}
+
+.lg {
+  padding: 28px;
+
+  @include up(md) {
+    padding: 36px;
+  }
+}
+
+.hoverable {
+  @include card-hover;
+}

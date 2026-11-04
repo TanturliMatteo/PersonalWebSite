@@ -1,0 +1,113 @@
+@use '@/styles/abstracts' as *;
+
+$marker-size: 40px;
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 20px;
+
+  // Vertical line connecting the markers.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: calc($marker-size / 2 - 1px);
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(var(--color-accent-soft-border), transparent);
+  }
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: $marker-size 1fr;
+  gap: 16px;
+
+  @include up(md) {
+    gap: 24px;
+  }
+}
+
+.marker {
+  @include flex-center;
+  position: relative;
+  width: $marker-size;
+  height: $marker-size;
+  margin-top: 20px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent-soft-border);
+  color: var(--color-accent);
+}
+
+.card {
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px 24px;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.organization {
+  margin-top: 2px;
+  font-weight: 500;
+  color: var(--color-accent-strong);
+}
+
+.location {
+  color: var(--color-text-subtle);
+  font-weight: 400;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+  white-space: nowrap;
+}
+
+.description {
+  margin-top: 12px;
+  color: var(--color-text-muted);
+}
+
+.highlights {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+  color: var(--color-text-muted);
+
+  li {
+    position: relative;
+    padding-left: 20px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 0.65em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gradient-accent);
+    }
+  }
+}

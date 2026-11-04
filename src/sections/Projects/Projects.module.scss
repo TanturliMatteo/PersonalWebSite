@@ -1,0 +1,16 @@
+@use '@/styles/abstracts' as *;
+
+.grid {
+  display: grid;
+  gap: 20px;
+
+  @include up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}

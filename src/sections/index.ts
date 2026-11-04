@@ -1,0 +1,8 @@
+// Page sections, in page order. Each one is self-contained (component + styles).
+export { About } from './About'
+export { Contact } from './Contact'
+export { Education } from './Education'
+export { Experience } from './Experience'
+export { Hero } from './Hero'
+export { Projects } from './Projects'
+export { Skills } from './Skills'

@@ -1,32 +1,70 @@
-# React + TypeScript + Vite
+# Matteo Tanturli · Personal Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+One-page personal website and portfolio, built with **React 19 + TypeScript + Vite + SCSS modules**.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev       # dev server
+npm run build     # typecheck + production build (dist/)
+npm run lint      # oxlint
+npm run preview   # preview the production build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Project structure
+
+```
+src/
+├── main.tsx                 # entry: mounts <App> and imports the global stylesheet
+├── App.tsx                  # page composition: Header, sections in order, Footer
+│
+├── data/                    # ALL the content. Edit these to update the site
+│   ├── profile.ts           #   name, role, bio, email, socials, avatar
+│   ├── skills.ts            #   skill groups + spoken languages
+│   ├── experience.ts        #   work experience + experience abroad
+│   ├── education.ts         #   degrees
+│   ├── projects.ts          #   portfolio projects
+│   └── navigation.ts        #   hamburger menu entries (id = section anchor)
+│
+├── types/index.ts           # shared TypeScript types for the data
+│
+├── components/
+│   ├── ui/                  # generic, reusable building blocks
+│   │   ├── Button/          #   link styled as a button (primary/secondary/ghost)
+│   │   ├── Card/            #   the rounded surface used everywhere
+│   │   ├── Container/       #   max-width + gutters
+│   │   ├── Icon/            #   inline SVG icon set
+│   │   ├── Section/         #   anchor + eyebrow + title wrapper for every section
+│   │   ├── Tag/             #   pill tag and TagList
+│   │   └── Timeline/        #   vertical card timeline (experience, education)
+│   └── layout/              # page chrome
+│       ├── Header/          #   fixed glass header + hamburger toggle
+│       ├── NavMenu/         #   dropdown menu that scrolls to sections
+│       └── Footer/
+│
+├── sections/                # one folder per page section (composes ui components)
+│   ├── Hero/  About/  Skills/  Experience/  Education/  Projects/  Contact/
+│
+├── hooks/                   # useActiveSection, useScrolled, useDismiss
+├── utils/cx.ts              # className joiner
+│
+└── styles/
+    ├── abstracts/           # compile-time only: breakpoints + mixins (no CSS output)
+    │   └── _index.scss      #   @use '@/styles/abstracts' as *;
+    ├── base/                # tokens (CSS variables), reset, global rules
+    └── main.scss            # global entry, imported once in main.tsx
+```
+
+### Conventions
+
+- Each component lives in its own folder: `Name.tsx` + `Name.module.scss` + `index.ts`.
+- Import through barrels and the `@/` alias: `import { Card, Section } from '@/components/ui'`.
+- Colors, radii, shadows and spacing are CSS variables in `styles/base/_tokens.scss`. Change the
+  theme there.
+- Shared style patterns (`card-surface`, `card-hover`, `focus-ring`, `up(md)` media queries, …)
+  are mixins in `styles/abstracts/_mixins.scss`.
+
+### Adding a section
+
+1. Create `src/sections/NewSection/` and wrap its content in `<Section id="new" title="…">`.
+2. Export it from `src/sections/index.ts` and place it in `App.tsx`.
+3. Add `{ id: 'new', label: '…' }` to `src/data/navigation.ts`, and it shows up in the menu.
