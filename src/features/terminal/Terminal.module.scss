@@ -1,0 +1,163 @@
+@use 'sass:list';
+@use '@/styles/abstracts' as *;
+
+// Dark window on purpose: the one place where the light site "drops into" the shell.
+$bg: #0f1020;
+$bar: #181a2e;
+$text: #e4e6f5;
+$muted: #8b8fb3;
+$green: color-mix(in srgb, #{tone(emerald)} 60%, white);
+$red: #ff8a8a;
+$window-buttons: (#ff5f57, #febc2e, #28c840);
+
+.dialog {
+  width: min(720px, calc(100vw - var(--container-gutter) * 2));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+
+  &::backdrop {
+    background: rgb(15 16 32 / 0.45);
+    backdrop-filter: blur(4px);
+  }
+
+  @include motion-ok {
+    &[open] {
+      animation: pop 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+  }
+}
+
+.window {
+  display: flex;
+  flex-direction: column;
+  height: min(480px, calc(100dvh - 48px));
+  border-radius: var(--radius-lg);
+  background: $bg;
+  color: $text;
+  font-family: var(--font-mono);
+  box-shadow:
+    0 30px 80px rgb(15 16 32 / 0.45),
+    0 0 0 1px rgb(255 255 255 / 0.06);
+  overflow: hidden;
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 6px 6px 16px;
+  background: $bar;
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+
+  span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  // Traffic-light colors generated from a Sass list.
+  @each $color in $window-buttons {
+    span:nth-child(#{list.index($window-buttons, $color)}) {
+      background: $color;
+    }
+  }
+}
+
+.title {
+  flex: 1;
+  overflow: hidden;
+  font-size: 0.8rem;
+  color: $muted;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.close {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  border-radius: var(--radius-sm);
+  color: $muted;
+
+  @include hover {
+    color: $text;
+    background: rgb(255 255 255 / 0.06);
+  }
+}
+
+.output {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  font-size: 0.875rem;
+  line-height: 1.7;
+
+  p {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
+.prompt {
+  color: $green;
+  white-space: nowrap;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: $text;
+  font-family: inherit;
+  font-size: 16px; // 16px = no auto-zoom on iOS when the field gets focus
+  caret-color: $green;
+
+  &::placeholder {
+    color: rgb(139 143 179 / 0.6);
+  }
+}
+
+// One class per Line kind (see commands.ts).
+.lineInput,
+.lineOutput {
+  color: $text;
+}
+
+.lineMuted {
+  color: $muted;
+}
+
+.lineError {
+  color: $red;
+}
+
+.lineSuccess {
+  color: $green;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 12px;
+  }
+}

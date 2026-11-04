@@ -1,5 +1,6 @@
 import { Button, Card, Icon, Section } from '@/components/ui'
-import { profile } from '@/data/profile'
+import { profile, socials } from '@/data'
+import { useLocale } from '@/i18n'
 import type { IconName } from '@/types'
 import styles from './Contact.module.scss'
 
@@ -10,31 +11,38 @@ interface ContactItem {
   href?: string
 }
 
-const items: ContactItem[] = [
-  { icon: 'mail', label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
-  ...(profile.phone
-    ? [{ icon: 'phone' as const, label: 'Phone', value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` }]
-    : []),
-  ...profile.socials.map((social) => ({
-    icon: social.icon,
-    label: social.label,
-    value: social.href.replace(/^https?:\/\/(www\.)?/, ''),
-    href: social.href,
-  })),
-  { icon: 'pin', label: 'Location', value: profile.location },
-]
-
 export function Contact() {
+  const { t } = useLocale()
+  const { contact } = t
+
+  const items: ContactItem[] = [
+    { icon: 'mail', label: contact.labels.email, value: profile.email, href: `mailto:${profile.email}` },
+    ...(profile.phone
+      ? [
+          {
+            icon: 'phone' as const,
+            label: contact.labels.phone,
+            value: profile.phone,
+            href: `tel:${profile.phone.replace(/\s/g, '')}`,
+          },
+        ]
+      : []),
+    ...socials.map((social) => ({
+      icon: social.icon,
+      label: social.label,
+      value: social.href.replace(/^https?:\/\/(www\.)?/, ''),
+      href: social.href,
+    })),
+    { icon: 'pin', label: contact.labels.location, value: t.location },
+  ]
+
   return (
-    <Section id="contact" eyebrow="Contact" title="Let’s work together">
+    <Section id="contact" eyebrow={contact.eyebrow} title={contact.title}>
       <Card padding="lg" className={styles.panel}>
         <div className={styles.intro}>
-          <p>
-            I’m currently looking for a Front-End or Full Stack Developer role. Have a project or an opportunity in
-            mind? I’d love to hear from you.
-          </p>
+          <p>{contact.intro}</p>
           <Button href={`mailto:${profile.email}`} icon="mail">
-            Send me an email
+            {contact.cta}
           </Button>
         </div>
 

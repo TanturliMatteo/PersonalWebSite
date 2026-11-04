@@ -1,0 +1,105 @@
+@use '@/styles/abstracts' as *;
+
+.intro {
+  display: grid;
+  gap: 20px;
+  font-size: fluid(1rem, 1.1rem);
+  color: var(--color-text-muted);
+
+  @include up(lg) {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+.introActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  > * {
+    flex: 1 1 100%;
+
+    @include up(sm) {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--grid-gap);
+
+  @include up(md) {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+.stat {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+
+  // The last tile spans the row on phones so the 2-column grid has no hole.
+  &:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+
+    @include up(md) {
+      grid-column: auto;
+    }
+  }
+}
+
+.statValue {
+  @include gradient-text;
+  font-size: fluid(1.6rem, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-size: 0.82rem;
+  color: var(--color-text-subtle);
+}
+
+.subheading {
+  margin: fluid(32px, 48px) 0 fluid(16px, 20px);
+  font-size: fluid(1.1rem, 1.2rem);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.techniques {
+  display: grid;
+  gap: var(--grid-gap);
+
+  @include up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.techniqueIcon {
+  @include flex-center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: var(--tone-soft);
+  color: var(--tone);
+}
+
+.techniqueTitle {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--tone-strong);
+}
+
+.techniqueText {
+  margin-top: 6px;
+  color: var(--color-text-muted);
+}

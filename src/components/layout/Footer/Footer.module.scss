@@ -24,7 +24,14 @@
   }
 }
 
-.top {
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 12px;
+}
+
+.link {
   @include focus-ring;
   @include touch-target;
   display: inline-flex;

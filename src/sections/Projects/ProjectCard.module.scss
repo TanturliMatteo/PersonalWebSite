@@ -1,19 +1,45 @@
 @use '@/styles/abstracts' as *;
 
+// Size container: everything below reacts to the CARD's width.
+.container {
+  container: project-card / inline-size;
+  display: grid; // lets the card stretch to the row height
+}
+
+// Featured projects take the whole row of the Projects grid.
+.featuredSlot {
+  @include up(md) {
+    grid-column: 1 / -1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Narrow layout (default): a vertical stack.
+// ---------------------------------------------------------------------------
 .card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto auto 1fr;
+  grid-template-areas:
+    'header'
+    'name'
+    'description'
+    'tags'
+    'links';
 }
 
 .header {
+  grid-area: header;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: fluid(16px, 20px);
 }
 
 .icon {
   @include flex-center;
+  flex-shrink: 0;
   width: fluid(42px, 48px);
   height: fluid(42px, 48px);
   border-radius: 14px;
@@ -22,33 +48,107 @@
 }
 
 .name {
+  grid-area: name;
   font-size: fluid(1.15rem, 1.3rem);
   font-weight: 700;
 }
 
 .description {
+  grid-area: description;
   margin-top: 10px;
   color: var(--color-text-muted);
 }
 
 .tags {
+  grid-area: tags;
   margin-top: fluid(16px, 20px);
 }
 
-// Pushed to the bottom so buttons line up across cards of different heights.
-// On phones the buttons share the row and grow into wide thumb targets.
+// Last row is 1fr + align end: buttons line up across cards of different heights.
 .links {
+  grid-area: links;
+  align-self: end;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: auto;
   padding-top: fluid(20px, 24px);
 
   > a {
     flex: 1 1 0;
+  }
+}
 
-    @include up(sm) {
-      flex: 0 0 auto;
+// ---------------------------------------------------------------------------
+// Container queries
+// ---------------------------------------------------------------------------
+
+// Medium card: buttons stop stretching.
+@include container-up(project-card, 420px) {
+  .links > a {
+    flex: 0 0 auto;
+  }
+}
+
+// Wide card: two columns, icon + badge on the left, content on the right.
+@include container-up(project-card, 640px) {
+  .card {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      'header name'
+      'header description'
+      'header tags'
+      'header links';
+    column-gap: 28px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  .icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Featured: a streak of light travelling around the border. --angle is a
+// registered <angle> (@property in base/_properties), so it animates smoothly.
+// The normal border stays, the comet runs on top of it.
+// ---------------------------------------------------------------------------
+.featured {
+  @include gradient-border(2px, (sky, indigo, violet), $style: 'comet');
+
+  // Content above the ::before ring.
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Reduced motion: a still, subtle highlight instead of the moving streak.
+  &::before {
+    opacity: 0.6;
+  }
+
+  @include motion-ok {
+    &::before {
+      opacity: 1;
+      animation: spin-border 9s linear infinite;
     }
+  }
+}
+
+@keyframes spin-border {
+  to {
+    --angle: 360deg;
   }
 }

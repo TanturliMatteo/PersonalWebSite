@@ -1,4 +1,9 @@
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
+@use 'palette' as *;
 
 $root-font-size: 16px;
 
@@ -28,4 +33,48 @@ $root-font-size: 16px;
   }
 
   @return clamp(#{$min}, #{$base} + #{$vw}, #{$max});
+}
+
+// Tone color from the palette: tone(violet) or tone('violet').
+// Unquoted names like `indigo` are CSS colors to Sass, so they are normalized to strings first.
+@function tone($name) {
+  @if meta.type-of($name) != 'string' {
+    $name: meta.inspect($name);
+  }
+  @if not map.has-key($tones, $name) {
+    @error 'Unknown tone `#{$name}`. Available: #{map.keys($tones)}';
+  }
+  @return map.get($tones, $name);
+}
+
+// Generates a field of spheres at COMPILE TIME: a comma-separated box-shadow list
+// with $count copies of the element at random positions inside $width x $height,
+// colored from the palette. $blur / $spread turn hard dots into soft glowing orbs.
+// Every build produces a different (but static) field.
+@function particles(
+  $count,
+  $width,
+  $height,
+  $blur: 0px,
+  $spread: 0px,
+  $alpha-min: 0.4,
+  $alpha-max: 0.9,
+  $tone-names: map.keys($tones)
+) {
+  $shadows: ();
+  $alpha-steps: math.round(($alpha-max - $alpha-min) * 100);
+
+  @for $i from 1 through $count {
+    $x: math.random(math.div($width, 1px)) * 1px;
+    $y: math.random(math.div($height, 1px)) * 1px;
+    $tone: tone(list.nth($tone-names, math.random(list.length($tone-names))));
+    $alpha: $alpha-min + math.div(math.random($alpha-steps + 1) - 1, 100);
+    $shadows: list.append(
+      $shadows,
+      $x $y $blur $spread color.change($tone, $alpha: $alpha),
+      $separator: comma
+    );
+  }
+
+  @return $shadows;
 }

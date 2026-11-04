@@ -1,0 +1,49 @@
+@use '@/styles/abstracts' as *;
+
+// Hidden unless the browser supports scroll-driven animations.
+.ring {
+  display: none;
+  // Exact box matching the SVG geometry: 46px button + 4px gap per side = 54px.
+  // Offsets are -5px because absolute positioning starts inside the button's 1px border.
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 54px;
+  height: 54px;
+  max-width: none; // the global reset caps svg at 100% of the parent (46px), which shifted the ring
+  overflow: visible;
+  pointer-events: none;
+}
+
+.track,
+.progress {
+  fill: none;
+}
+
+.track {
+  stroke: var(--color-border);
+  opacity: 0.6;
+}
+
+.progress {
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+@include supports-scroll-timeline {
+  .ring {
+    display: block;
+  }
+
+  .progress {
+    animation: draw linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

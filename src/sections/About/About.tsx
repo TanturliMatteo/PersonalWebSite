@@ -1,28 +1,27 @@
 import { Card, Icon, Section } from '@/components/ui'
-import { education } from '@/data/education'
-import { profile } from '@/data/profile'
-import { languages } from '@/data/skills'
+import { useLocale } from '@/i18n'
 import type { IconName } from '@/types'
 import styles from './About.module.scss'
 
-interface Fact {
-  icon: IconName
-  label: string
-  value: string
-}
-
-const facts: Fact[] = [
-  { icon: 'graduation', label: 'Degree', value: education[0].title },
-  { icon: 'pin', label: 'Based in', value: profile.location },
-  { icon: 'globe', label: 'Languages', value: languages.map((l) => `${l.name} (${l.level})`).join(', ') },
-]
-
 export function About() {
+  const { t } = useLocale()
+  const { about } = t
+
+  const facts: { icon: IconName; label: string; value: string }[] = [
+    { icon: 'graduation', label: about.facts.degree, value: t.education.entries[0].title },
+    { icon: 'pin', label: about.facts.basedIn, value: t.location },
+    {
+      icon: 'globe',
+      label: about.facts.languages,
+      value: t.languages.map((language) => `${language.name} (${language.level})`).join(', '),
+    },
+  ]
+
   return (
-    <Section id="about" eyebrow="About me" title="Who I am">
+    <Section id="about" eyebrow={about.eyebrow} title={about.title}>
       <div className={styles.grid}>
         <Card padding="lg" className={styles.bio}>
-          {profile.about.map((paragraph) => (
+          {about.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </Card>

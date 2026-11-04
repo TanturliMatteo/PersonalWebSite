@@ -1,10 +1,12 @@
 import { Section, Timeline } from '@/components/ui'
-import { education } from '@/data/education'
+import { useLocale } from '@/i18n'
 
 export function Education() {
+  const { education } = useLocale().t
+
   return (
-    <Section id="education" eyebrow="Education" title="Where I studied">
-      <Timeline entries={education} icon="graduation" />
+    <Section id="education" eyebrow={education.eyebrow} title={education.title}>
+      <Timeline entries={education.entries} icon="graduation" />
     </Section>
   )
 }

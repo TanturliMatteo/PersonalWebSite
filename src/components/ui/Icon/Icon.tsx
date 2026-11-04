@@ -21,6 +21,8 @@ const PATHS: Record<IconName, string> = {
   globe:
     'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z',
   code: 'm16 18 6-6-6-6M8 6l-6 6 6 6',
+  terminal: 'm4 17 6-6-6-6m8 14h8',
+  layers: 'm12 2 10 5-10 5L2 7l10-5ZM2 12l10 5 10-5M2 17l10 5 10-5',
 }
 
 const FILLED = new Set<IconName>(['github', 'linkedin'])

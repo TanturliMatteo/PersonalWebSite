@@ -1,6 +1,7 @@
 # Matteo Tanturli · Personal Website
 
-One-page personal website and portfolio, built with **React 19 + TypeScript + Vite + SCSS modules**.
+One-page personal website and portfolio, built with **React 19 + TypeScript + Vite + SCSS modules**,
+in Italian and English.
 
 ```bash
 npm install
@@ -13,72 +14,102 @@ npm run preview   # preview the production build
 ## Project structure
 
 ```
+vite/
+└── siteStats.ts             # Vite plugin: source stats (__SITE_STATS__) + dist/build-stats.json
+
 src/
 ├── main.tsx                 # entry: mounts <App> and imports the global stylesheet
-├── App.tsx                  # page composition: Header, sections in order, Footer
+├── App.tsx                  # page composition: provider, header, sections, footer, terminal
 │
 ├── data/                    # ALL the content. Edit these to update the site
-│   ├── profile.ts           #   name, role, bio, email, socials, avatar
-│   ├── skills.ts            #   skill groups + spoken languages
-│   ├── experience.ts        #   work experience + experience abroad
-│   ├── education.ts         #   degrees
-│   ├── projects.ts          #   portfolio projects
-│   └── navigation.ts        #   hamburger menu entries (id = section anchor)
+│   ├── shared.ts            #   language-independent: name, links, skills, projects, section order
+│   ├── locales/en.ts        #   every English text
+│   ├── locales/it.ts        #   every Italian text
+│   └── index.ts             #   registry of locales
 │
-├── types/index.ts           # shared TypeScript types for the data
+├── i18n/                    # LocaleProvider + useLocale() → { locale, setLocale, t }
+├── types/                   # shared TypeScript types (Content = shape of a locale file)
 │
 ├── components/
 │   ├── ui/                  # generic, reusable building blocks
-│   │   ├── Button/          #   link styled as a button (primary/secondary/ghost)
-│   │   ├── Card/            #   the rounded surface used everywhere
-│   │   ├── Container/       #   max-width + gutters
-│   │   ├── Icon/            #   inline SVG icon set
-│   │   ├── Section/         #   anchor + eyebrow + title wrapper for every section
-│   │   ├── Tag/             #   pill tag and TagList
-│   │   └── Timeline/        #   vertical card timeline (experience, education)
+│   │   ├── Button/          #   <a> with href, <button> without (primary/secondary/ghost)
+│   │   ├── Card/            #   rounded surface; `tone` and `reveal` props
+│   │   ├── Container/  Icon/  Section/  Tag/  Timeline/
 │   └── layout/              # page chrome
-│       ├── Header/          #   fixed glass header + hamburger toggle
-│       ├── NavMenu/         #   dropdown menu that scrolls to sections
+│       ├── Header/          #   glass header + hamburger with scroll-progress ring
+│       ├── LanguageSwitch/  #   IT / EN segmented control
+│       ├── NavMenu/         #   dropdown that scrolls to sections
 │       └── Footer/
 │
-├── sections/                # one folder per page section (composes ui components)
-│   ├── Hero/  About/  Skills/  Experience/  Education/  Projects/  Contact/
+├── features/
+│   └── terminal/            # easter-egg terminal (press "/")
+│       ├── commands.ts      #   pure command logic (no React)
+│       ├── Terminal.tsx     #   UI in a native <dialog>
+│       └── events.ts, useTerminalShortcut.ts
 │
-├── hooks/                   # useActiveSection, useScrolled, useDismiss
+├── sections/                # one folder per page section
+│   ├── Hero/  About/  Skills/  Experience/  Education/  Projects/  Stack/  Contact/
+│
+├── hooks/                   # useActiveSection, useScrolled, useDismiss, useBuildStats
 ├── utils/cx.ts              # className joiner
 │
 └── styles/
-    ├── abstracts/           # compile-time only: breakpoints + mixins (no CSS output)
-    │   └── _index.scss      #   @use '@/styles/abstracts' as *;
-    ├── base/                # tokens (CSS variables), reset, global rules
-    └── main.scss            # global entry, imported once in main.tsx
+    ├── abstracts/           # compile-time only (no CSS output). @use '@/styles/abstracts' as *;
+    │   ├── _palette.scss    #   $tones map: the single source of every color family
+    │   ├── _functions.scss  #   fluid(), tone(), particles()
+    │   ├── _mixins.scss     #   up(), hover, press, touch-target, card-surface, …
+    │   ├── _effects.scss    #   motion-ok, supports-scroll-timeline, container-up, gradient-border
+    │   └── _breakpoints.scss
+    ├── base/
+    │   ├── _properties.scss #   @property --angle, --scroll-progress (animatable custom props)
+    │   ├── _tokens.scss     #   CSS variables (colors, spacing, radii, safe areas)
+    │   ├── _tones.scss      #   [data-tone='…'] themes generated with @each from the palette
+    │   ├── _motion.scss     #   [data-reveal] scroll-driven reveal
+    │   └── _reset.scss, _global.scss
+    └── main.scss
 ```
 
-### Conventions
+## Conventions
 
 - Each component lives in its own folder: `Name.tsx` + `Name.module.scss` + `index.ts`.
 - Import through barrels and the `@/` alias: `import { Card, Section } from '@/components/ui'`.
-- Colors, radii, shadows and spacing are CSS variables in `styles/base/_tokens.scss`. Change the
-  theme there.
-- Shared style patterns (`card-surface`, `card-hover`, `focus-ring`, `up(md)` media queries, …)
-  are mixins in `styles/abstracts/_mixins.scss`.
-
-### Mobile rules
-
-- **Mobile-first**: base styles are for phones; add larger layouts with `@include up(sm|md|lg|xl)`.
-- **Fluid sizes**: use `fluid($min, $max)` (from `abstracts/_functions.scss`) for font sizes and
-  spacing instead of piling up breakpoints. Spacing tokens (`--container-gutter`, `--grid-gap`,
-  `--card-padding`, `--section-gap`) are already fluid.
-- **Hover only on pointer devices**: write hover styles with `@include hover { … }`, never a bare
-  `&:hover`, so effects don't stick after a tap. Use `@include press` for tap feedback.
-- **Touch targets**: interactive elements are at least 44×44px (`@include touch-target`).
-- **Safe areas**: notch / home-indicator insets are exposed as `--safe-top|right|bottom|left`
-  (needs `viewport-fit=cover`, set in `index.html`).
-- **Viewport height**: use `svh` / `dvh` with a `vh` fallback line, not bare `100vh`.
-- **Landscape phones**: `@include landscape-short { … }` for screens shorter than 500px.
+- No text in components: every string comes from `useLocale().t`.
+- Colors, radii, shadows and spacing are CSS variables in `styles/base/_tokens.scss`.
 
 ### Adding a section
 
-1. Create `src/sections/NewSection/` and wrap its content in `<Section id="new" title="…">`.
+1. Create `src/sections/NewSection/` and wrap its content in `<Section id="new" …>`.
 2. Export it from `src/sections/index.ts` and place it in `App.tsx`.
-3. Add `{ id: 'new', label: '…' }` to `src/data/navigation.ts`, and it shows up in the menu.
+3. Add `'new'` to `SectionId` (`types`) and `sectionIds` (`data/shared.ts`), and its label to
+   `nav` in each locale file. It shows up in the menu and in the terminal `goto` command.
+
+### Adding a language
+
+Add the code to `Locale`, create `data/locales/xx.ts` typed as `Content` (TypeScript lists every
+missing string), and register it in `data/index.ts`. The switch picks it up automatically.
+
+## Modern CSS features
+
+All of them are progressive enhancements: browsers without support, or users with
+`prefers-reduced-motion`, get the plain static site.
+
+| Feature | Where |
+| --- | --- |
+| Scroll-driven reveal (`animation-timeline: view()`) | `base/_motion.scss`, any `[data-reveal]` |
+| Scroll progress ring (`scroll(root)` + SVG `pathLength`) | `layout/Header/ScrollRing` |
+| Comet streak around featured cards (`@property --angle`) | `Projects/ProjectCard`, mixin `gradient-border` |
+| Container queries | `Projects/ProjectCard` |
+| Compile-time parallax spheres (`math.random()`) | `Hero`, function `particles()` |
+| Staggered tags (`@for` → per-item `animation-range` / `transition-delay`) | `ui/Tag`, `<TagList stagger>` |
+| Generated color themes (`@each` + `sass:color`) | `base/_tones.scss` |
+
+## Mobile rules
+
+- **Mobile-first**: base styles are for phones; add larger layouts with `@include up(sm|md|lg|xl)`.
+- **Fluid sizes**: use `fluid($min, $max)` for font sizes and spacing instead of piling up breakpoints.
+- **Hover only on pointer devices**: `@include hover { … }`, never a bare `&:hover`; `@include press`
+  for tap feedback.
+- **Touch targets**: at least 44×44px (`@include touch-target`).
+- **Safe areas**: `--safe-top|right|bottom|left` (needs `viewport-fit=cover`, set in `index.html`).
+- **Viewport height**: `svh` / `dvh` with a `vh` fallback line, not bare `100vh`.
+- **Landscape phones**: `@include landscape-short { … }`.

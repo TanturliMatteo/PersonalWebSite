@@ -1,14 +1,16 @@
 import { Section, Timeline } from '@/components/ui'
-import { abroad, experience } from '@/data/experience'
+import { useLocale } from '@/i18n'
 import styles from './Experience.module.scss'
 
 export function Experience() {
-  return (
-    <Section id="experience" eyebrow="Experience" title="Where I’ve worked">
-      <Timeline entries={experience} icon="briefcase" />
+  const { experience } = useLocale().t
 
-      <h3 className={styles.subheading}>Experience abroad</h3>
-      <Timeline entries={abroad} icon="globe" />
+  return (
+    <Section id="experience" eyebrow={experience.eyebrow} title={experience.title}>
+      <Timeline entries={experience.work} icon="briefcase" />
+
+      <h3 className={styles.subheading}>{experience.abroadTitle}</h3>
+      <Timeline entries={experience.abroad} icon="globe" />
     </Section>
   )
 }

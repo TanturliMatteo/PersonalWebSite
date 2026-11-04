@@ -1,27 +1,25 @@
 import { Button, Section } from '@/components/ui'
-import { profile } from '@/data/profile'
-import { projects } from '@/data/projects'
+import { profile, projects } from '@/data'
+import { useLocale } from '@/i18n'
 import { ProjectCard } from './ProjectCard'
 import styles from './Projects.module.scss'
 
 export function Projects() {
-  const github = profile.socials.find((social) => social.icon === 'github')
+  const { t } = useLocale()
 
   return (
-    <Section id="projects" eyebrow="Portfolio" title="Selected projects">
+    <Section id="projects" eyebrow={t.projects.eyebrow} title={t.projects.title}>
       <div className={styles.grid}>
         {projects.map((project) => (
-          <ProjectCard key={project.name} project={project} />
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
 
-      {github && (
-        <div className={styles.more}>
-          <Button href={github.href} variant="secondary" icon="github" external>
-            More on GitHub
-          </Button>
-        </div>
-      )}
+      <div className={styles.more}>
+        <Button href={profile.githubUrl} variant="secondary" icon="github" external>
+          {t.projects.more}
+        </Button>
+      </div>
     </Section>
   )
 }

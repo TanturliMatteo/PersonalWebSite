@@ -1,0 +1,50 @@
+@use '@/styles/abstracts' as *;
+
+$option-width: 44px;
+
+.switch {
+  @include card-surface;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--count), $option-width);
+  height: 46px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+
+  // Sliding pill behind the active option, moved by --active (set inline from React).
+  &::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: $option-width;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-accent);
+    box-shadow: 0 4px 12px rgb(79 70 229 / 0.3);
+    translate: calc(var(--active) * 100%) 0;
+    transition: translate var(--transition);
+  }
+}
+
+.option {
+  @include focus-ring;
+  position: relative; // above the pill
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+
+  @include hover {
+    color: var(--color-text);
+  }
+}
+
+.active {
+  &,
+  &:hover {
+    color: #fff;
+  }
+}

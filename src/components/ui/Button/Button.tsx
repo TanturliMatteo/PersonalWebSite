@@ -5,24 +5,41 @@ import { Icon } from '../Icon'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  href: string
   children: ReactNode
+  /** With href it renders an <a> (navigation), without it a <button> (action). */
+  href?: string
+  onClick?: () => void
   variant?: 'primary' | 'secondary' | 'ghost'
   icon?: IconName
-  /** Opens in a new tab (for external links). */
+  /** Opens the link in a new tab. */
   external?: boolean
 }
 
-/** A link styled as a button: the site only navigates, so it always renders an <a>. */
-export function Button({ href, children, variant = 'primary', icon, external = false }: ButtonProps) {
+export function Button({ children, href, onClick, variant = 'primary', icon, external = false }: ButtonProps) {
+  const className = cx(styles.button, styles[variant])
+  const content = (
+    <>
+      {icon && <Icon name={icon} size={18} />}
+      <span>{children}</span>
+    </>
+  )
+
+  if (!href) {
+    return (
+      <button type="button" className={className} onClick={onClick}>
+        {content}
+      </button>
+    )
+  }
+
   return (
     <a
       href={href}
-      className={cx(styles.button, styles[variant])}
+      className={className}
+      onClick={onClick}
       {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
     >
-      {icon && <Icon name={icon} size={18} />}
-      <span>{children}</span>
+      {content}
     </a>
   )
 }

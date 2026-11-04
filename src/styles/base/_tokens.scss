@@ -11,11 +11,12 @@
   --color-text: #12131a;
   --color-text-muted: #5b6072;
   --color-text-subtle: #737890; // 4.5:1 on white, readable outdoors on phones
-  --color-accent: #4f46e5;
+  // Accent derived from the palette map (abstracts/_palette.scss)
+  --color-accent: #{tone(indigo)};
   --color-accent-strong: #4338ca;
   --color-accent-soft: #eef0ff;
   --color-accent-soft-border: #c7cbff;
-  --gradient-accent: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+  --gradient-accent: linear-gradient(135deg, #{tone(indigo)} 0%, #{tone(violet)} 100%);
 
   // Typography
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;

@@ -15,11 +15,13 @@ export function Tag({ label, variant = 'neutral' }: TagProps) {
 interface TagListProps {
   items: string[]
   variant?: TagVariant
+  /** Tags pop in one after another on scroll, and wave when the parent is hovered. */
+  stagger?: boolean
 }
 
-export function TagList({ items, variant }: TagListProps) {
+export function TagList({ items, variant, stagger = false }: TagListProps) {
   return (
-    <ul className={styles.list}>
+    <ul className={cx(styles.list, stagger && styles.staggered)}>
       {items.map((item) => (
         <li key={item}>
           <Tag label={item} variant={variant} />

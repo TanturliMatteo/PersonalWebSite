@@ -60,6 +60,12 @@
   }
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .menuWrapper {
   position: relative;
 }
@@ -69,9 +75,10 @@
   @include focus-ring;
   @include card-surface;
   @include press(0.94);
+  position: relative;
   width: 46px;
   height: 46px;
-  border-radius: var(--radius-md);
+  border-radius: 16px; // fixed: ScrollRing's corners are drawn concentric to this radius
   color: var(--color-text);
   transition:
     transform var(--transition),

@@ -1,0 +1,9 @@
+// Single source of truth for color families. Everything else (accent tokens,
+// [data-tone] themes, particles, gradient borders) is generated from this map.
+$tones: (
+  'indigo': #4f46e5,
+  'violet': #9333ea,
+  'sky': #0284c7,
+  'emerald': #059669,
+  'amber': #d97706,
+);
