@@ -26,7 +26,7 @@ export const en: Content = {
     tagline: 'Front-End & Full Stack Developer building clean, fast and typed web apps with React and TypeScript.',
     viewProjects: 'View projects',
     getInTouch: 'Get in touch',
-    scrollHint: 'Scroll to About',
+    scrollHint: 'Scroll to {section}',
   },
   about: {
     eyebrow: 'About me',

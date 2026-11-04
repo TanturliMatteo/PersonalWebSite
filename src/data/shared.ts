@@ -22,14 +22,18 @@ export const socials: SocialLink[] = [
   },
 ]
 
-/** Page order. Every id needs a <Section id> and a label in each locale's `nav`. */
+/**
+ * Page order: the ONLY place where it is defined. The page (App), the menu,
+ * the hero scroll arrow and the terminal `goto` command all follow it.
+ * Projects come right after the hero: they are the strongest proof of skill.
+ */
 export const sectionIds: SectionId[] = [
   'home',
-  'about',
-  'skills',
-  'experience',
-  'education',
   'projects',
+  'experience',
+  'skills',
+  'about',
+  'education',
   'stack',
   'contact',
 ]

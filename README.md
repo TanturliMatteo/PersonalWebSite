@@ -86,9 +86,12 @@ src/
 ### Adding a section
 
 1. Create `src/sections/NewSection/` and wrap its content in `<Section id="new" …>`.
-2. Export it from `src/sections/index.ts` and place it in `App.tsx`.
-3. Add `'new'` to `SectionId` (`types`) and `sectionIds` (`data/shared.ts`), and its label to
-   `nav` in each locale file. It shows up in the menu and in the terminal `goto` command.
+2. Add `'new'` to `SectionId` (`types`) and register the component in the `sections` map of
+   `src/sections/index.ts` (TypeScript errors until every id has a component).
+3. Put `'new'` where you want it in `sectionIds` (`data/shared.ts`) and add its label to `nav` in
+   each locale file. Page, menu, hero arrow and terminal `goto` all follow that order.
+
+To **reorder** the page, change `sectionIds` only.
 
 ### Adding a language
 

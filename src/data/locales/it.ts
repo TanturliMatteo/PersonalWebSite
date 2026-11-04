@@ -26,7 +26,7 @@ export const it: Content = {
     tagline: 'Sviluppatore Front-End e Full Stack: creo web app pulite, veloci e tipizzate con React e TypeScript.',
     viewProjects: 'Vedi i progetti',
     getInTouch: 'Contattami',
-    scrollHint: 'Vai a Chi sono',
+    scrollHint: 'Vai a {section}',
   },
   about: {
     eyebrow: 'Chi sono',

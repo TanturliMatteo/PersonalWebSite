@@ -1,11 +1,13 @@
 import { Button, Icon, Section } from '@/components/ui'
-import { profile, socials } from '@/data'
-import { useLocale } from '@/i18n'
+import { profile, sectionIds, socials } from '@/data'
+import { format, useLocale } from '@/i18n'
 import styles from './Hero.module.scss'
 
 export function Hero() {
   const { t } = useLocale()
   const [firstName, ...rest] = profile.name.split(' ')
+  // The arrow always points to the section that follows the hero.
+  const nextId = sectionIds[sectionIds.indexOf('home') + 1] ?? 'contact'
 
   return (
     <Section id="home">
@@ -53,7 +55,11 @@ export function Hero() {
         </div>
       </div>
 
-      <a href="#about" className={styles.scrollHint} aria-label={t.hero.scrollHint}>
+      <a
+        href={`#${nextId}`}
+        className={styles.scrollHint}
+        aria-label={format(t.hero.scrollHint, { section: t.nav[nextId] })}
+      >
         <Icon name="arrow-down" size={18} />
       </a>
     </Section>

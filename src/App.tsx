@@ -1,21 +1,19 @@
 import { Footer, Header } from '@/components/layout'
+import { sectionIds } from '@/data'
 import { Terminal } from '@/features/terminal'
 import { LocaleProvider } from '@/i18n'
-import { About, Contact, Education, Experience, Hero, Projects, Skills, Stack } from '@/sections'
+import { sections } from '@/sections'
 
 export default function App() {
   return (
     <LocaleProvider>
       <Header />
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Education />
-        <Projects />
-        <Stack />
-        <Contact />
+        {/* Rendered in the order defined by `sectionIds` (data/shared.ts). */}
+        {sectionIds.map((id) => {
+          const SectionComponent = sections[id]
+          return <SectionComponent key={id} />
+        })}
       </main>
       <Footer />
       <Terminal />
