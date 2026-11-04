@@ -2,22 +2,24 @@
 
 .panel {
   display: grid;
-  gap: 32px;
-  overflow: hidden;
+  gap: fluid(24px, 48px);
 
   @include up(lg) {
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 48px;
   }
 }
 
 .intro {
   display: grid;
-  justify-items: start;
-  gap: 24px;
-  font-size: 1.15rem;
+  justify-items: stretch; // full-width button on phones
+  gap: 20px;
+  font-size: fluid(1.02rem, 1.15rem);
   color: var(--color-text-muted);
+
+  @include up(sm) {
+    justify-items: start;
+  }
 }
 
 .list {
@@ -29,8 +31,9 @@
   @include focus-ring;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 14px;
+  gap: 14px;
+  min-height: 64px;
+  padding: 10px 14px;
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);
   border: 1px solid transparent;
@@ -39,9 +42,15 @@
     border-color var(--transition);
 }
 
-a.item:hover {
-  background: var(--color-accent-soft);
-  border-color: var(--color-accent-soft-border);
+a.item {
+  @include hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent-soft-border);
+  }
+
+  &:active {
+    background: var(--color-accent-soft);
+  }
 }
 
 .icon {
@@ -68,10 +77,9 @@ a.item:hover {
   color: var(--color-text-subtle);
 }
 
+// Wrap long values (email, URLs) instead of cutting them off on narrow phones.
 .value {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   font-weight: 600;
   color: var(--color-text);
+  overflow-wrap: anywhere;
 }

@@ -4,12 +4,14 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
-  height: var(--header-height);
+  // The bar grows by the notch height, content stays below it.
+  height: calc(var(--header-height) + var(--safe-top));
+  padding-top: var(--safe-top);
+  padding-inline: var(--safe-left) var(--safe-right);
   border-bottom: 1px solid transparent;
   transition:
     background-color var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
+    border-color var(--transition);
 }
 
 .scrolled {
@@ -21,20 +23,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   height: 100%;
 }
 
 .brand {
   @include focus-ring;
+  @include touch-target;
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
   border-radius: var(--radius-sm);
   font-weight: 700;
 }
 
 .logo {
   @include flex-center;
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -47,6 +53,7 @@
 
 .name {
   display: none;
+  white-space: nowrap;
 
   @include up(sm) {
     display: inline;
@@ -61,16 +68,18 @@
   @include flex-center;
   @include focus-ring;
   @include card-surface;
+  @include press(0.94);
   width: 46px;
   height: 46px;
   border-radius: var(--radius-md);
   color: var(--color-text);
   transition:
+    transform var(--transition),
     color var(--transition),
     border-color var(--transition),
     background-color var(--transition);
 
-  &:hover {
+  @include hover {
     color: var(--color-accent);
     border-color: var(--color-accent-soft-border);
   }

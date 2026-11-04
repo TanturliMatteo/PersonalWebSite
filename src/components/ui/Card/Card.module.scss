@@ -3,18 +3,15 @@
 .card {
   @include card-surface;
   position: relative;
+  min-width: 0; // lets cards shrink inside grid / flex parents on narrow screens
 }
 
 .md {
-  padding: 24px;
+  padding: var(--card-padding);
 }
 
 .lg {
-  padding: 28px;
-
-  @include up(md) {
-    padding: 36px;
-  }
+  padding: var(--card-padding-lg);
 }
 
 .hoverable {

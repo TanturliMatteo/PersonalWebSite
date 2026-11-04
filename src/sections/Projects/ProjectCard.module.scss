@@ -9,20 +9,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: fluid(16px, 20px);
 }
 
 .icon {
   @include flex-center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: fluid(42px, 48px);
+  height: fluid(42px, 48px);
+  border-radius: 14px;
   background: var(--gradient-accent);
   color: #fff;
 }
 
 .name {
-  font-size: 1.3rem;
+  font-size: fluid(1.15rem, 1.3rem);
   font-weight: 700;
 }
 
@@ -32,14 +32,23 @@
 }
 
 .tags {
-  margin-top: 20px;
+  margin-top: fluid(16px, 20px);
 }
 
 // Pushed to the bottom so buttons line up across cards of different heights.
+// On phones the buttons share the row and grow into wide thumb targets.
 .links {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: auto;
-  padding-top: 24px;
+  padding-top: fluid(20px, 24px);
+
+  > a {
+    flex: 1 1 0;
+
+    @include up(sm) {
+      flex: 0 0 auto;
+    }
+  }
 }

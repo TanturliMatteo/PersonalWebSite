@@ -1,6 +1,8 @@
+@use '@/styles/abstracts' as *;
+
 .subheading {
-  margin: 40px 0 20px;
-  font-size: 1.2rem;
+  margin: fluid(32px, 40px) 0 fluid(16px, 20px);
+  font-size: fluid(1.1rem, 1.2rem);
   font-weight: 700;
   color: var(--color-text-muted);
 }

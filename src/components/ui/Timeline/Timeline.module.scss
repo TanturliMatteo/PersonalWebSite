@@ -1,11 +1,15 @@
 @use '@/styles/abstracts' as *;
 
-$marker-size: 40px;
-
 .timeline {
+  // Smaller markers on phones leave more width for the card text.
+  --marker-size: 32px;
   position: relative;
   display: grid;
-  gap: 20px;
+  gap: var(--grid-gap);
+
+  @include up(md) {
+    --marker-size: 40px;
+  }
 
   // Vertical line connecting the markers.
   &::before {
@@ -13,7 +17,7 @@ $marker-size: 40px;
     position: absolute;
     top: 8px;
     bottom: 8px;
-    left: calc($marker-size / 2 - 1px);
+    left: calc(var(--marker-size) / 2 - 1px);
     width: 2px;
     border-radius: 2px;
     background: linear-gradient(var(--color-accent-soft-border), transparent);
@@ -23,28 +27,25 @@ $marker-size: 40px;
 .item {
   position: relative;
   display: grid;
-  grid-template-columns: $marker-size 1fr;
-  gap: 16px;
-
-  @include up(md) {
-    gap: 24px;
-  }
+  grid-template-columns: var(--marker-size) minmax(0, 1fr);
+  gap: fluid(12px, 24px);
 }
 
 .marker {
   @include flex-center;
   position: relative;
-  width: $marker-size;
-  height: $marker-size;
-  margin-top: 20px;
+  width: var(--marker-size);
+  height: var(--marker-size);
+  margin-top: fluid(18px, 24px);
   border-radius: 50%;
   background: var(--color-surface);
   border: 2px solid var(--color-accent-soft-border);
   color: var(--color-accent);
-}
 
-.card {
-  min-width: 0;
+  svg {
+    width: 55%;
+    height: 55%;
+  }
 }
 
 .header {
@@ -52,11 +53,11 @@ $marker-size: 40px;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px 24px;
+  gap: 10px 24px;
 }
 
 .title {
-  font-size: 1.15rem;
+  font-size: fluid(1.05rem, 1.15rem);
   font-weight: 700;
 }
 
@@ -73,8 +74,9 @@ $marker-size: 40px;
 
 .meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px 10px;
 }
 
 .period {

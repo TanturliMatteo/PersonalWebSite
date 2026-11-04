@@ -2,7 +2,7 @@
 
 .grid {
   display: grid;
-  gap: 20px;
+  gap: var(--grid-gap);
 
   @include up(lg) {
     grid-template-columns: 1.6fr 1fr;
@@ -12,26 +12,35 @@
 .bio {
   display: grid;
   align-content: center;
-  gap: 16px;
-  font-size: 1.08rem;
+  gap: 14px;
+  font-size: fluid(1rem, 1.08rem);
   color: var(--color-text-muted);
 
   p:first-child {
-    font-size: 1.2rem;
+    font-size: fluid(1.1rem, 1.2rem);
     font-weight: 600;
     color: var(--color-text);
   }
 }
 
+// Phones: one column. Tablets: facts side by side. Desktop: stacked next to the bio.
 .facts {
   display: grid;
-  gap: 20px;
+  gap: var(--grid-gap);
+
+  @include up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include up(lg) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .fact {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 14px;
 }
 
 .factIcon {
@@ -45,7 +54,7 @@
 }
 
 .factLabel {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;

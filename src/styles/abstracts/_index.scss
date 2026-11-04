@@ -1,4 +1,5 @@
-// Single entry point for compile-time helpers.
+// Single entry point for compile-time helpers (they emit no CSS on their own).
 // In any component: @use '@/styles/abstracts' as *;
 @forward 'breakpoints';
+@forward 'functions';
 @forward 'mixins';

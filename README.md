@@ -63,6 +63,20 @@ src/
 - Shared style patterns (`card-surface`, `card-hover`, `focus-ring`, `up(md)` media queries, …)
   are mixins in `styles/abstracts/_mixins.scss`.
 
+### Mobile rules
+
+- **Mobile-first**: base styles are for phones; add larger layouts with `@include up(sm|md|lg|xl)`.
+- **Fluid sizes**: use `fluid($min, $max)` (from `abstracts/_functions.scss`) for font sizes and
+  spacing instead of piling up breakpoints. Spacing tokens (`--container-gutter`, `--grid-gap`,
+  `--card-padding`, `--section-gap`) are already fluid.
+- **Hover only on pointer devices**: write hover styles with `@include hover { … }`, never a bare
+  `&:hover`, so effects don't stick after a tap. Use `@include press` for tap feedback.
+- **Touch targets**: interactive elements are at least 44×44px (`@include touch-target`).
+- **Safe areas**: notch / home-indicator insets are exposed as `--safe-top|right|bottom|left`
+  (needs `viewport-fit=cover`, set in `index.html`).
+- **Viewport height**: use `svh` / `dvh` with a `vh` fallback line, not bare `100vh`.
+- **Landscape phones**: `@include landscape-short { … }` for screens shorter than 500px.
+
 ### Adding a section
 
 1. Create `src/sections/NewSection/` and wrap its content in `<Section id="new" title="…">`.

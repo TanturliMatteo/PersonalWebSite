@@ -9,25 +9,40 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  // Stop iOS / Android from inflating text in landscape.
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  // Anchor jumps land below the fixed header (notch included).
+  scroll-padding-top: calc(var(--header-height) + var(--safe-top) + 16px);
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  // Long words, URLs and emails never push the layout sideways.
+  overflow-wrap: break-word;
+  // No accidental horizontal scroll; `clip` (unlike `hidden`) keeps position: sticky working.
+  overflow-x: clip;
 }
 
 img,
-svg {
+svg,
+video {
   display: block;
   max-width: 100%;
 }
 
+img {
+  height: auto;
+}
+
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
@@ -42,6 +57,14 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a,
+button {
+  // No grey flash on tap in mobile WebKit; :focus-visible keeps keyboard accessibility.
+  -webkit-tap-highlight-color: transparent;
+  // Disables double-tap zoom on controls, removing the tap delay.
+  touch-action: manipulation;
 }
 
 ul,
@@ -59,6 +82,7 @@ ol {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

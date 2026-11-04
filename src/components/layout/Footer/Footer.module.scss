@@ -2,7 +2,9 @@
 
 .footer {
   margin-top: calc(var(--section-gap) / 2);
-  padding-block: 28px;
+  padding-top: 24px;
+  // Clear of the iPhone home indicator.
+  padding-bottom: calc(24px + var(--safe-bottom));
   border-top: 1px solid var(--color-border);
   font-size: 0.9rem;
   color: var(--color-text-subtle);
@@ -10,23 +12,31 @@
 
 .inner {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
+  text-align: center;
+
+  @include up(sm) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
 }
 
 .top {
   @include focus-ring;
+  @include touch-target;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  padding-inline: 8px;
   border-radius: var(--radius-sm);
   font-weight: 600;
   color: var(--color-text-muted);
   transition: color var(--transition);
 
-  &:hover {
+  @include hover {
     color: var(--color-accent);
   }
 }

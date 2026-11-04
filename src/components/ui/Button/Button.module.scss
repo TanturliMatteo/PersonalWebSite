@@ -2,14 +2,18 @@
 
 .button {
   @include focus-ring;
+  @include touch-target;
+  @include press;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 11px 20px;
+  padding: 10px 20px;
   border-radius: var(--radius-pill);
   font-size: 0.95rem;
   font-weight: 600;
   white-space: nowrap;
+  user-select: none;
   transition:
     transform var(--transition),
     box-shadow var(--transition),
@@ -17,8 +21,12 @@
     border-color var(--transition),
     color var(--transition);
 
-  &:hover {
+  @include hover {
     transform: translateY(-2px);
+  }
+
+  svg {
+    flex-shrink: 0;
   }
 }
 
@@ -27,7 +35,7 @@
   color: #fff;
   box-shadow: 0 8px 24px rgb(79 70 229 / 0.28);
 
-  &:hover {
+  @include hover {
     box-shadow: 0 12px 28px rgb(79 70 229 / 0.36);
   }
 }
@@ -38,18 +46,22 @@
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
 
-  &:hover {
+  @include hover {
     border-color: var(--color-accent-soft-border);
     color: var(--color-accent);
   }
 }
 
 .ghost {
-  padding-inline: 12px;
+  padding-inline: 14px;
   color: var(--color-text-muted);
 
-  &:hover {
+  @include hover {
     color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  &:active {
     background: var(--color-accent-soft);
   }
 }

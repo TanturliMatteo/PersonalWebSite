@@ -5,11 +5,7 @@
 }
 
 .header {
-  margin-bottom: 32px;
-
-  @include up(md) {
-    margin-bottom: 40px;
-  }
+  margin-bottom: fluid(24px, 40px);
 }
 
 .eyebrow {
@@ -23,6 +19,6 @@
 }
 
 .title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: fluid(1.75rem, 2.5rem);
   font-weight: 800;
 }

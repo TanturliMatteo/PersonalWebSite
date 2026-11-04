@@ -1,0 +1,31 @@
+@use 'sass:math';
+
+$root-font-size: 16px;
+
+@function -to-px($value) {
+  @if math.unit($value) == 'rem' {
+    @return math.div($value, 1rem) * $root-font-size;
+  }
+  @return $value;
+}
+
+// Fluid value that scales linearly between two viewport widths, clamped at both ends.
+// fluid(16px, 24px) -> 16px at 360px wide, 24px at 1280px wide, smooth in between.
+// Accepts px or rem; rem values keep the result in rem so browser zoom / font size is respected.
+@function fluid($min, $max, $from: 360px, $to: 1280px) {
+  $use-rem: math.unit($min) == 'rem';
+  $min-px: -to-px($min);
+  $max-px: -to-px($max);
+
+  $slope: math.div($max-px - $min-px, $to - $from); // unitless, per px of viewport
+  $base: $min-px - $slope * $from;
+  $vw: math.div(math.round($slope * 100 * 10000), 10000) * 1vw;
+
+  @if $use-rem {
+    $base: math.div(math.round(math.div($base, $root-font-size) * 10000), 10000) * 1rem;
+  } @else {
+    $base: math.div(math.round(math.div($base, 1px) * 100), 100) * 1px;
+  }
+
+  @return clamp(#{$min}, #{$base} + #{$vw}, #{$max});
+}
