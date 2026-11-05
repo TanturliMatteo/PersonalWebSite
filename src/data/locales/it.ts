@@ -171,6 +171,57 @@ export const it: Content = {
   footer: {
     builtWith: 'Realizzato con React, TypeScript e SCSS.',
     openTerminal: 'Terminale',
+    privacy: 'Privacy',
+  },
+  privacy: {
+    title: 'Privacy e cookie',
+    updated: 'Informativa ai sensi dell’art. 13 GDPR · Ultimo aggiornamento: 5 novembre 2026',
+    close: 'Chiudi l’informativa',
+    sections: [
+      {
+        heading: 'Titolare del trattamento',
+        body: ['Matteo Tanturli, persona fisica. Contatto: {email}.'],
+      },
+      {
+        heading: 'Quali dati vengono trattati',
+        body: [
+          'Hosting: il sito è ospitato da Vercel Inc. Come ogni server web, registra dati tecnici delle richieste (indirizzo IP, browser, data e ora) per erogare il sito e proteggerlo da abusi.',
+          'Statistiche: uso Vercel Web Analytics per sapere in forma aggregata quante visite riceve il sito, quali pagine, da quali paesi, dispositivi, browser e siti di provenienza. Non usa cookie: ogni visitatore è riconosciuto solo tramite un hash della richiesta che si azzera ogni 24 ore, quindi non è possibile identificarti né seguirti tra giorni o siti diversi.',
+          'Email: se mi scrivi, uso il tuo indirizzo e il contenuto del messaggio solo per risponderti.',
+        ],
+      },
+      {
+        heading: 'Base giuridica',
+        body: [
+          'Legittimo interesse (art. 6.1.f GDPR) a erogare e mettere in sicurezza il sito e a conoscerne l’utilizzo in forma aggregata; per le email, la tua richiesta di contatto (art. 6.1.b).',
+        ],
+      },
+      {
+        heading: 'Cookie e memoria locale',
+        body: [
+          'Il sito non usa cookie, né di profilazione né di statistica. Salva solo la lingua scelta nella memoria locale del browser (localStorage): è uno strumento tecnico, necessario alla funzione che richiedi, e per questo non serve il consenso né un banner.',
+          'Font e immagini sono ospitati direttamente sul sito: il caricamento della pagina non contatta Google Fonts o altri servizi esterni. I link a GitHub, LinkedIn e ai progetti portano su siti terzi, con le loro informative.',
+        ],
+      },
+      {
+        heading: 'Destinatari e trasferimenti',
+        body: [
+          'Vercel Inc. tratta i dati per mio conto come responsabile del trattamento. Può trasferirli negli Stati Uniti, con le garanzie previste dal GDPR (EU-US Data Privacy Framework e/o Clausole contrattuali standard). I dati non vengono venduti né ceduti ad altri.',
+        ],
+      },
+      {
+        heading: 'Conservazione',
+        body: [
+          'Le statistiche sono conservate solo in forma aggregata; i log tecnici per il tempo previsto da Vercel; le email per il tempo necessario alla conversazione.',
+        ],
+      },
+      {
+        heading: 'I tuoi diritti',
+        body: [
+          'Puoi chiedere accesso, rettifica, cancellazione, limitazione od opporti al trattamento (artt. 15–22 GDPR) scrivendo a {email}. Hai anche diritto di proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).',
+        ],
+      },
+    ],
   },
   terminal: {
     title: 'matteo@portfolio: ~',

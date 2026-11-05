@@ -171,6 +171,57 @@ export const en: Content = {
   footer: {
     builtWith: 'Built with React, TypeScript & SCSS.',
     openTerminal: 'Terminal',
+    privacy: 'Privacy',
+  },
+  privacy: {
+    title: 'Privacy & cookies',
+    updated: 'Notice under Art. 13 GDPR · Last updated: 5 November 2026',
+    close: 'Close the privacy notice',
+    sections: [
+      {
+        heading: 'Data controller',
+        body: ['Matteo Tanturli, private individual. Contact: {email}.'],
+      },
+      {
+        heading: 'What data is processed',
+        body: [
+          'Hosting: the site is hosted by Vercel Inc. Like any web server, it logs technical request data (IP address, browser, date and time) to serve the site and protect it from abuse.',
+          'Statistics: I use Vercel Web Analytics to see, in aggregate, how many visits the site gets, which pages, and from which countries, devices, browsers and referring sites. It sets no cookies: each visitor is only recognised by a hash of the request that resets every 24 hours, so you cannot be identified or followed across days or websites.',
+          'Email: if you write to me, I use your address and message only to reply.',
+        ],
+      },
+      {
+        heading: 'Legal basis',
+        body: [
+          'Legitimate interest (Art. 6(1)(f) GDPR) in serving and securing the site and understanding its use in aggregate; for emails, your request to get in touch (Art. 6(1)(b)).',
+        ],
+      },
+      {
+        heading: 'Cookies and local storage',
+        body: [
+          'The site uses no cookies, neither for tracking nor for statistics. It only saves your chosen language in the browser’s local storage (localStorage): a technical tool needed for the feature you asked for, so no consent or banner is required.',
+          'Fonts and images are hosted on the site itself: loading the page does not contact Google Fonts or any other external service. Links to GitHub, LinkedIn and the projects lead to third-party sites with their own policies.',
+        ],
+      },
+      {
+        heading: 'Recipients and transfers',
+        body: [
+          'Vercel Inc. processes the data on my behalf as a processor. It may transfer it to the United States under the safeguards required by the GDPR (EU-US Data Privacy Framework and/or Standard Contractual Clauses). Data is never sold or shared with anyone else.',
+        ],
+      },
+      {
+        heading: 'Retention',
+        body: [
+          'Statistics are kept only in aggregate; technical logs for the period set by Vercel; emails for as long as the conversation needs.',
+        ],
+      },
+      {
+        heading: 'Your rights',
+        body: [
+          'You can request access, rectification, erasure, restriction or object to processing (Arts. 15–22 GDPR) by writing to {email}. You can also lodge a complaint with your data protection authority (in Italy, the Garante per la protezione dei dati personali, garanteprivacy.it).',
+        ],
+      },
+    ],
   },
   terminal: {
     title: 'matteo@portfolio: ~',

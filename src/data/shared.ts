@@ -7,7 +7,8 @@ export const profile = {
   name: 'Matteo Tanturli',
   email: 'matteotanturli@gmail.com',
   phone: undefined as string | undefined, // e.g. '+39 339 429 5075' to show it in Contact
-  avatarUrl: 'https://avatars.githubusercontent.com/u/220749629?v=4',
+  /** Self-hosted copy of the GitHub avatar: no third-party request on page load. */
+  avatarUrl: '/avatar.jpg',
   githubUrl: GITHUB,
   /** Repository of this website, shown in the "Behind the site" section once published. */
   siteRepoUrl: 'https://github.com/TanturliMatteo/PersonalWebSite',

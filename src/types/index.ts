@@ -128,7 +128,13 @@ export interface Content {
     copied: string
     labels: { email: string; phone: string; location: string }
   }
-  footer: { builtWith: string; openTerminal: string }
+  footer: { builtWith: string; openTerminal: string; privacy: string }
+  privacy: {
+    title: string
+    updated: string
+    close: string
+    sections: { heading: string; body: string[] }[]
+  }
   terminal: {
     title: string
     close: string
