@@ -160,6 +160,7 @@ export const it: Content = {
     intro:
       'Sto cercando un ruolo come Front-End o Full Stack Developer. Hai un progetto o un’opportunità in mente? Scrivimi volentieri.',
     cta: 'Scrivimi una email',
+    copied: 'Email copiata negli appunti',
     labels: { email: 'Email', phone: 'Telefono', location: 'Dove' },
   },
   footer: {

@@ -33,6 +33,29 @@
   }
 }
 
+// Feedback under the CTA once the email is copied. The live region is always
+// rendered (empty) so screen readers announce the text, and its reserved line
+// height keeps the layout from jumping when the message appears.
+.copied {
+  min-height: 1.5em;
+  margin-top: -8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: tone(emerald);
+
+  &:not(:empty) {
+    animation: copied-in var(--transition) both;
+  }
+}
+
+@keyframes copied-in {
+  from {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+}
+
 // -----------------------------------------------------------------------------
 // Contact rows
 // -----------------------------------------------------------------------------
@@ -90,6 +113,11 @@ a.item {
   color: var(--color-text-subtle);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.labelCopied {
+  color: tone(emerald);
+  animation: copied-in var(--transition) both;
 }
 
 .value {

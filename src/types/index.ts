@@ -125,6 +125,7 @@ export interface Content {
   contact: SectionHeading & {
     intro: string
     cta: string
+    copied: string
     labels: { email: string; phone: string; location: string }
   }
   footer: { builtWith: string; openTerminal: string }

@@ -160,6 +160,7 @@ export const en: Content = {
     intro:
       'I’m currently looking for a Front-End or Full Stack Developer role. Have a project or an opportunity in mind? I’d love to hear from you.',
     cta: 'Send me an email',
+    copied: 'Email copied to clipboard',
     labels: { email: 'Email', phone: 'Phone', location: 'Location' },
   },
   footer: {
