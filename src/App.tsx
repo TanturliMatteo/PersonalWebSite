@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import { Footer, Header } from '@/components/layout'
 import { sectionIds } from '@/data'
 import { Terminal } from '@/features/terminal'
@@ -17,6 +18,7 @@ export default function App() {
       </main>
       <Footer />
       <Terminal />
+      <Analytics />
     </LocaleProvider>
   )
 }
