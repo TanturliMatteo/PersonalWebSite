@@ -86,6 +86,11 @@ export const it: Content = {
     title: 'Dove ho studiato',
     entries: [
       {
+        title: 'Academy Java Testing',
+        organization: 'Forma.Temp',
+        period: 'Ottobre – Novembre 2026',
+      },
+      {
         title: 'Laurea Triennale in Informatica',
         organization: 'Università degli Studi di Perugia',
         period: 'Aprile 2026',

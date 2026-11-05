@@ -86,6 +86,11 @@ export const en: Content = {
     title: 'Where I studied',
     entries: [
       {
+        title: 'Java Testing Academy',
+        organization: 'Forma.Temp',
+        period: 'October – November 2026',
+      },
+      {
         title: 'Bachelor’s Degree in Computer Science',
         organization: 'Università degli Studi di Perugia',
         period: 'April 2026',

@@ -8,7 +8,7 @@ export function About() {
   const { about } = t
 
   const facts: { icon: IconName; label: string; value: string }[] = [
-    { icon: 'graduation', label: about.facts.degree, value: t.education.entries[0].title },
+    { icon: 'graduation', label: about.facts.degree, value: t.education.entries[1].title },
     { icon: 'pin', label: about.facts.basedIn, value: t.location },
     {
       icon: 'globe',
