@@ -68,10 +68,12 @@
 
 .statValue {
   @include gradient-text;
-  font-size: fluid(1.6rem, 2.2rem);
+  font-size: fluid(1.5rem, 2.2rem);
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
+  // Keep values like "100.7 kB" on one line.
+  white-space: nowrap;
 }
 
 .statLabel {
