@@ -119,8 +119,8 @@ export const it: Content = {
         'Dashboard per la gestione degli studenti con tipizzazione rigorosa, Row Level Security su PostgreSQL, join relazionali in una sola richiesta e form controllati dentro modali animate.',
       'cv-drag-and-drop':
         'Web app per creare un curriculum su un vero foglio A4 con il drag and drop: testi, linee, immagini e icone si agganciano a una griglia, testo ricco con Tiptap ed esportazione in PDF.',
-      'unity-room':
-        'Scena Unity con oggetti modellati e importati da Blender, illuminazione, movimento del giocatore e collisioni.',
+      streakly:
+        'App mobile per tracciare le abitudini su iOS e Android: frequenze personalizzabili, streak e statistiche, calendario dello storico, promemoria locali e animazioni su misura, con i dati salvati offline sul dispositivo.',
     },
   },
   stack: {

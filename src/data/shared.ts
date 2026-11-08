@@ -85,9 +85,9 @@ export const projects: Project[] = [
     repoUrl: `${GITHUB}/cv_drag_and_drop`,
   },
   {
-    id: 'unity-room',
-    name: 'Unity Room',
-    tags: ['Unity', 'Blender', '3D'],
-    repoUrl: `${GITHUB}/UnityRoom`,
+    id: 'streakly',
+    name: 'Streakly',
+    tags: ['React Native', 'Expo', 'TypeScript', 'Reanimated'],
+    repoUrl: `${GITHUB}/streakly`,
   },
 ]

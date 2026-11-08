@@ -119,8 +119,8 @@ export const en: Content = {
         'Student management dashboard with strict typing, PostgreSQL Row Level Security, relational joins in a single request and controlled forms inside animated modals.',
       'cv-drag-and-drop':
         'Web app to build a résumé on a real A4 sheet with drag and drop: text, lines, images and icons snap to a grid, rich text editing with Tiptap, and PDF export.',
-      'unity-room':
-        'Unity scene with base objects modelled and imported from Blender, lighting setup, player movement and collisions.',
+      streakly:
+        'Mobile habit tracker for iOS and Android: flexible schedules, streaks and stats, a history calendar, local reminders and custom animations, all stored offline on the device.',
     },
   },
   stack: {
